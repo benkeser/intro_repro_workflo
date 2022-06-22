@@ -1,0 +1,42 @@
+# Site settings
+title: ''
+subtitle: Introduction to Reproducible Workflows in R
+description: |
+    This is the website associated with the shortcourse 'Introduction to Reproducible Workflows in R'.
+    The course covers some fundamental tools used to develop reproducible pipelines for data 
+    analysis. By the end of the course students will have learned how to: 
+    execute workflows using command line operations, generate reproducible reports using
+    <a href='https://rmarkdown.rstudio.com/'>R Markdown</a>, basic usage of
+    <a href='https://www.gnu.org/software/make/'>GNU Make</a> for automating report builds,
+    and essentials of project organization and best coding practices.
+baseurl: "/intro_repro_workflo" # the github directory
+url: "https://benkeser.github.io/" # the base hostname & protocol for your site
+
+# host the syllabus on google docs
+# File: Publish to Web
+githubdir: "benkeser/intro_repro_workflo"
+
+# Author/user information
+email: benkeser@emory.edu
+twitter_username: biosbenk
+github_username:  benkeser
+authorurl: "https://bit.ly/rsph_benkeser"
+address: |
+    Emory University
+    Department of Biostatistics and Bioinformatics
+    1518 Clifton Rd. NE
+    Atlanta, GA 30322
+
+# Use collection to manage records
+collections: 
+    recordings:
+        output: true
+        permalink: /:collection/:name
+
+# Build settings
+markdown: kramdown
+
+# Other options
+excerpt_separator: "<!--more-->"
+
+include: ['_images', '_css']
