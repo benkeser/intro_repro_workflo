@@ -1,0 +1,458 @@
+---
+title: "Coding in style"
+author: "David Benkeser, PhD MPH<br> <span style = 'font-size: 50%;'> Emory University<br> Department of Biostatistics and Bioinformatics </span>"
+date: 'INFO550<br><br>`r renv::activate("../.."); icons::icon_style(icons::fontawesome("link"), fill = '#ffffff')` [.white[bit.ly/info550]](https://bit.ly/info550) <br> `r icons::icon_style(icons::fontawesome("book"), fill = '#ffffff')` [.white[Additional reading]](https://benkeser.github.io/info550/readings#coding-style)'
+tldr: "Write your code for humans to read. No one else will read it, but you might, later."
+recording: "5f89add5-a50d-4e39-a2bb-adc801199294"
+start: "0:0:0"
+reading: "coding-style"
+breakoutsoln: ""
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    nature:
+      titleSlideClass: ["left", "middle", "inverse"]
+      highlightStyle: tomorrow-night-blue
+      highlightLanguage: rmarkdown
+      highlightLines: false
+---
+
+background-color: #84754e
+class: title-slide, center, inverse, middle
+
+.small[*Saying [researchers] should spend more time thinking about the way they write code would be like telling a novelist that she should spend more time thinking about how best to use Microsoft Word. Sure, there are people who take whole courses in how to change fonts or do mail merge, but anyone moderately clever just opens the thing up and figures out how it works along the way.* </br> *This manual began with a growing sense that our own version of this self-taught seat-of-the-pants approach to computing was hitting its limits.*]
+</br> </br> .small[Gentzkow and Shapiro </br> [__Code and Data for the Social Sciences: A Practitioner’s Guide__](https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf)]
+
+???
+
+Why spend a lecture on coding style if everyone here already knows how to code?
+* Clear code is more likely to be correct.
+* Clear code is easier to use.
+* Clear code is easier to revisit six months from now.
+* Software based on clear code is easier to maintain.
+* Clear code is easier to extend.
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+
+extra_css <- list(
+  ".small" =  list(`font-size` = "80%"),
+  ".large" =  list(`font-size` = "150%"),
+  "ul li" = list(`margin-bottom` = "10px"),
+  ".red" = list(color = "#da291c",
+                `font-weight` = "600"),
+  ".green" = list(color = "#348338",
+                `font-weight` = "600"),
+  ".code-box" = list(display = "inline-block", 
+    width = "95%",
+    `line-height` = "1em",
+    padding = "5px",
+    `font-size` = "80%",
+    `background-color` = "#f6f6f6",
+    `align-items` = "left",
+    `font-family` = "Courier Prime",
+    border = "1px solid black"),
+  "ul" = list(`margin-bottom` = "0.5em",
+              `margin-top` = "0.5em"),
+  "p" = list(`margin-bottom` = "0.25em"),
+  "a" = list(color = "#007dba"),
+  "a:hover" = list("text-decoration" = "underline")
+)
+
+style_mono_accent(
+  base_color = "#012169",
+  header_font_google = google_font("DM Sans"),
+  text_font_google   = google_font("DM Sans", "400", "400i"),
+  code_font_google   = google_font("Courier Prime"),
+  extra_css = extra_css
+)
+```
+
+<style type="text/css">
+.remark-slide-content {
+    font-size: 22px
+}
+</style>
+
+---
+
+## Principles for scientific coding
+
+In this order: 
+
+1. Code that works.
+2. Code that is reproducible.
+3. Code that is readable.
+4. Code that is generalizable.
+5. Code that is efficient.
+
+A __minimal standard__ for scientific computing is 1-3. 
+
+???
+
+"Works" means code that gives the right answer. 
+
+As we've discussed, reproducible means that someone else could run the code and get the same answer. 
+
+The focus of this chapter will mostly be on point 3, which will enable an easier time achieving point 4. 
+
+Efficiency is far down the line of desirables. 
+
+---
+
+## Advice for beginner coders
+
+.red[Test code before relying on it.]
+
+It's OK to __copy/paste code__ from Stack Overflow, but make sure you __understand how it works__.
+* Run line by line and see what each does. 
+* Change the code and see if it behaves as expected.
+
+Stakes for copy/paste can be high!
+* Incorrect analyses.
+* Expensive (inadvertent) cloud computing.
+
+???
+
+Reading other's solution to problems is how we learn a language. Just like a spoken language -- seeing how native speakers construct phrases is important! But we need to understand those phrases before we incorporate them into our dialect, lest we be misunderstood (or worse).
+
+If the code is implementing some statistical method, make sure you understand that method well enough to at least be able to accurately describe it in the methods section of a manuscript.
+* E.g., do you really know what `confint` does to a `glm` in `R`? 
+
+There are many horror stories of students running code from the internet to spin up premium AWS instances to do simple tasks, running costs into the thousands of dollars. 
+
+---
+
+## Advice for intermediate coders
+
+.red[Premature optimization is the root of all evil.]
+
+Getting code .green[correct] AND .green[readable] is __most important__.
+* Make your code more efficient later.
+* After a paper is submitted for review?
+
+Remember: you don't get bonus points for code that "looks impressive".
+
+???
+
+Early in my coding career, I heard from someone, somewhere that `for` loops should be avoided if at all possible. It struck fear in my heart -- I don't want people to think I'm a bad coder! I'm only starting to recover.
+
+No matter how many times I repeat this mantra, I still find myself trying to make my code way too smart way too soon. It's an ongoing process of learning the needed amount of generalizability/efficiency to hit on a first pass through code. 
+
+Get the code working and readable first, optimize and generalize later. 
+
+---
+
+### Think before you code
+
+```{r, show-example-thought, eval = FALSE}
+# Averaging over drtmle option:
+#   Instantiate empty lists 
+#   Note: length = 1 if n_SL = 1 or "drtmle" not in avg_over):
+#     nuisance_drtmle 
+#     nuisance_aiptw_c
+#     ic_drtmle 
+#     QnMod, gnMod, QrnMod, grnMod
+#     drtmle -- eventually avg over to get final point estimates
+#     aiptw_c -- eventually avg over 
+#     tmle -- eventually avg over
+#     aiptw -- eventually avg over
+#     gcomp -- eventually avg over
+#     validRows -- should this be added to the output?
+#   Wrap everything into a big for loop and add indexes to the
+#   objects above
+#   Add code below for loop to do aggregation
+
+# For introducing cross-validated standard errors: 
+#   if se_cv = "full", but cvFolds = 1
+#   need to modify make_validRows recognize this situation?
+#   Or could modify estimateQ/g directly and have the functions
+#   call themselves if se_cv = "full" and cvFolds == 1
+#   or probably better to add an if statement that would call the 
+#   estimateQ again outside. Yes, that's probably the way to go
+```
+
+???
+
+This is literally copied from a local branch of my `drtmle` R package where I'm working on feature additions. 
+
+Before you start writing code, think about what you want the code to do. 
+* For large coding projects, a white board may be helpful when you start.
+
+Just this careful thought process can lead to solutions for challenging problems. Like in the above you see that I started just typing one possible solution and by the end had convinced myself that it was a good way to go. 
+
+---
+
+## Don't repeat yourself
+
+Don't repeat yourself (DRY) is a fundamental concept in programming. 
+* *Ruthlessly eliminate duplication*, [Wilson et al](https://swcarpentry.github.io/good-enough-practices-in-scientific-computing/)
+
+For example, variables `score1=1`, `score2=2`, `score3=3` &#8594; `score=list(1,2,3)`. 
+
+If you write the same code more than once, it should be a function. 
+* Break large tasks into smaller calls to functions. 
+* Give functions (everything, really) meaningful names.
+	* self-documenting code
+	* use tab-completion
+
+???
+
+It is highly inefficient and dangerous to copy and paste multiple chunks of code. 
+* What if you need to change 1 thing? Needs to be changed in multiple places. Risk getting a wrong answer because we forgot to change one small thing.
+
+Also, don't repeat others. Search around to see if someone already has come up with a packaged solution to your problem. Don't reinvent the wheel!
+* But remember to try out the code to make sure you know what it's doing!
+
+Meaningful names make reading code much easier. It's OK to make names long and informative. Most (good) text editors will have tab completion so that it won't slow you down typing (once you're used to using it). 
+
+---
+
+## Functions in `R`
+
+If you don't know how functions work in `R`, .red[learn about them now]. 
+* [Software carpentry: Creating R Functions](https://swcarpentry.github.io/r-novice-inflammation/02-func-R/)
+* [R for Data Science: Functions](https://r4ds.had.co.nz/functions.html)
+* [DataCamp: A Tutorial on Using Functions in R!](https://www.datacamp.com/community/tutorials/functions-in-r-a-tutorial)
+
+---
+
+
+## Generalize... some
+
+Write code __a bit more general__ than your data or specific task.
+* Don't assume particular dimensions.
+* Don't forget about missing values (even if *your* data have none).
+
+But .red[don't try to handle every case.] 
+* Try to anticipate what you might be asked for, but don't prepare for every possibility.
+* If you think of __extreme cases__ where code will break, __document them__.
+
+Use __function arguments__ to handle different cases. 
+* Don't assume particular file names.
+* Don't assume particular tuning parameters. 
+* Don't assume particular regression formulas.
+
+???
+
+Do you hear your collaborators making an arbitrary decision in the analysis plan? Prepare for that decision to change. 
+
+An example: in [a recent paper](https://www.sciencedirect.com/science/article/pii/S1047279720301769), we looked at county-level characteristics by proportion of county that was African-American. The analysis started looking at </> 13% (the national average). This was an arbitrary choice made at the outset of the analysis. So when I wrote the code to produce summary statistics stratifying on this characteristic, I wrote it so one could provide any arbitrary number/s and obtain characteristics. Eventually, they wanted to see it broken down by 13/25% and by 13/25/50%. They ended up not liking the look of the tables, so we went back to </>13 (trivial). For me, all I needed to do was change __a single function input__. This was a (rare) success story for me in generalizing code. The code to make this table is [here](https://github.com/benkeser/covid-and-race/blob/master/Code/01_tablefunctions.R).
+
+---
+
+## No magic numbers
+
+There are __many decision points__ in an analysis. Give them a name!
+* How many __bootstrap samples__?
+  * `nboot = 1e3`
+* What __tolerance for convergence__ of an algorithm?
+  * `tol_covergence = 1e-3`
+* What __threshold__ for excluding missing data?
+  * `tol_missingness = 3`
+
+Even better, include them as an __argument to a function__ (with default values and documentation, as needed)!
+* `get_bootstrap_ci <- function(..., nboot = 1e3)`
+* `my_algorithm <- function(..., tol_convergence = 1e-3)`
+* `rm_missing_data <- function(..., tol_missingness = 3)`
+
+---
+
+## Other guidelines
+
+* __Indent__!
+  * 2 or 4 spaces (join the debate)
+  * Tabs can get nasty across systems. In my experience, Windows is pretty dumb about this.
+
+* Use __white space__!
+  * After commas, operators
+
+* Use `{}` and `()` to __avoid ambiguity__.
+
+* Keep __lines short__!
+  * Rule of thumb is 72 or 80 characters. 
+  * Most text editors have settings to help with this.
+
+???
+
+If you're ever porting code from Windows to Unix and you get weird errors about unknown characters, it is often because of handling of special characters like tabs and returns.
+
+---
+
+.large[__Other guidelines__]
+
+.large[🤮]
+
+```{r}
+# move values above/below quantiles to those quantiles
+winsorize<-function(vec,q=0.006){
+lohi<-quantile(vec,c(q,1-q),na.rm=TRUE)
+if(diff(lohi)<0)lohi<-rev(lohi)
+vec[!is.na(vec)&vec<lohi[1]]<-lohi[1]
+vec[!is.na(vec)&vec>lohi[2]]<-lohi[2]
+vec}
+```
+
+.large[😍]
+
+```{r}
+# move values above/below quantiles to those quantiles
+winsorize <- function(vec, q = 0.006){
+  lohi <- quantile(vec, c(q, 1 - q), na.rm = TRUE)
+  if(diff(lohi) < 0){
+    lohi <- rev(lohi)
+  }
+  vec[ !is.na(vec) & (vec < lohi[1]) ] <- lohi[1]
+  vec[ !is.na(vec) & (vec > lohi[2]) ] <- lohi[2]
+  return(vec)
+}
+```
+
+???
+
+The parenthesis around `vec < lohi[1]` are probably unnecessary, but want to illustrate the point. 
+
+---
+
+## Naming objects
+
+Give objects informative names:
+* Names should be: 
+  1. most importantly, descriptive
+  2. as concise as possible while still being descriptive
+* Avoid `tmp1`, `tmp2`, ...
+  * ...as `tmp`ting as it may be.
+* Functions as verbs, objects as nouns
+
+???
+
+Please don't look too closely at my `R` packages. You may learn what a hypocrite I am.
+
+---
+
+## Naming objects
+
+Have __consistency__ in your naming systems:
+* E.g., `markers` vs. `mnames`; `nft` vs. `n_ft`
+
+Commit to a case:
+* `camelCase` vs. `pothole_case`
+
+Don't confuse yourself:
+* `total` vs. `totals`
+* `result` vs. `rslt`
+* `X` vs. `x` 
+* `z` vs. `zz`
+
+__Underscores__ should be preferred as separator when coding in `R`.
+
+???
+
+I decided a few years ago to move to `pothole_case`, editing old packages is now a harrowing experience. You can see it on the previous slide about `drtmle`. Maybe one day I will go through and make case consistent... after I get tenure?
+
+The reason for the underscore thing is a bit subtle. But there are [functions in `R` called `methods`](http://adv-r.had.co.nz/S3.html) that work a little bit different. This is what allows you to type `summary(a_vector)` and `summary(a_data_frame)` and get results. `R` is actually calling two different functions, `summary.numeric` and `summary.data.frame` to get these results. So when you write a function called `get.results`, it's a little ambiguous as to whether there is an object with class `results` that you are calling the method `get` on, or if you are literally just trying to call a function named `get.results`. 
+
+---
+
+## Self-documenting code
+
+Many of these recommendations are to .green[make code self-documenting]. 
+
+Comments should be used mostly for __why__, not __what__.
+* The __what__ should be inherent from the code itself.
+
+This is really __hard to do__.
+* Sometimes its harder than its worth, but it is worth trying!
+
+---
+
+## Self-documenting code
+
+Here's an example of .red[bad code]:
+
+```{r}
+tmp1 <- 9.81
+tmp2 <- 5
+tmp3 <- 0.5 * tmp1 * tmp2^2
+```
+
+Here's an example of .green[documented] .red[bad code]:
+
+```{r}
+# gravitational constant
+tmp1 <- 9.81
+# time object is falling
+tmp2 <- 5
+# displacement of the object
+tmp3 <- 0.5 * tmp1 * tmp2^2
+```
+
+???
+
+The first chunk is bad because the variables have non-informative names and nothing is documented. We have to think really hard to understand what this code is doing.
+
+The second chunk is better; at least it is documented! But it's redundant and not self-documenting. 
+
+---
+
+## Self-documenting code
+
+Here's .green[self-documenting code]:
+
+```{r}
+gravitational_force <- 9.81
+time_in_seconds <- 5
+displacement <- 1/2 * gravitational_force * time_in_seconds^2
+```
+
+Now let's add a .green[comment] explaining the __why__:
+
+```{r}
+# compute displacement of falling object with Newton's equation
+gravitational_force <- 9.81
+time_in_seconds <- 5
+displacement <- 1/2 * gravitational_force * time_in_seconds^2
+```
+
+---
+
+## Self-documenting code
+
+Even better, .green[make it a function]!
+
+```{r}
+# for falling objects based on Newton's equation
+compute_displacement <- function(time_in_seconds){
+  gravitational_force <- 9.81
+  time_in_seconds <- 5
+  displacement <- 1/2 * gravitational_force * time_in_seconds^2
+  return(displacement)
+}
+```
+
+---
+
+background-color: #487f84
+class: title-slide, inverse, middle
+
+.large[*Rules for writing comments:*
+1. *Only comment code that's hard to understand.*
+2. *Try not to write code that's hard to understand.*
+]
+???
+
+There is a natural tendency to overwrite comments in code. I do it all the time. Why does it matter?
+* Comments need to be "maintained". If the code changes, the comments may need to as well.
+* Don't end up with conflicting comments and code. 
+
+---
+
+## Recap
+
+Why spend a lecture on coding style if everyone knows how to code?
+* Clear code is more likely to be __correct__.
+* Clear code is __easier to use__.
+* Clear code is __easier to revisit__ six months from now.
+* Software based on clear code is __easier to maintain__.
+* Clear code is __easier to extend__.
+
