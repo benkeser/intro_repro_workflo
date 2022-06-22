@@ -304,8 +304,15 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   align-items: left;
   vertical-align: middle;
 }
+.red {
+  color: #da291c;
+  font-weight: 600;
+}
 .small {
   font-size: 80%;
+}
+.large {
+  font-size: 150%;
 }
 ul li {
   margin-bottom: 10px;

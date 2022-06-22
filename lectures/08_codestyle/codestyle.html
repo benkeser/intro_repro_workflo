@@ -1,27 +1,34 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Coding in style</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="David Benkeser, PhD MPH   Emory University  Department of Biostatistics and Bioinformatics " />
+    <script src="codestyle_files/header-attrs-2.14/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
+
+.title[
+# Coding in style
+]
+.author[
+### David Benkeser, PhD MPH<br> <span style="font-size: 50%;"> Emory University<br> Department of Biostatistics and Bioinformatics </span>
+]
+.date[
+### Introduction Reproducible Workflows in R<br><br><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg> <a href="https://bit.ly/intro_repro_workflo">.white[bit.ly/intro_repro_workflo]</a> <br> <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"/></svg> <a href="https://benkeser.github.io/intro_repro_workflo/readings#coding-style">.white[Additional reading]</a>
+]
+
 ---
-title: "Coding in style"
-author: "David Benkeser, PhD MPH<br> <span style = 'font-size: 50%;'> Emory University<br> Department of Biostatistics and Bioinformatics </span>"
-date: 'Introduction Reproducible Workflows in R<br><br>`r renv::activate("../.."); fontawesome::fa("link", fill = '#ffffff')` [.white[bit.ly/intro_repro_workflo]](https://bit.ly/intro_repro_workflo) <br> `r fontawesome::fa("book", fill = '#ffffff')` [.white[Additional reading]](https://benkeser.github.io/intro_repro_workflo/readings#coding-style)'
-tldr: "Write your code for humans to read. No one else will read it, but you might, later."
-recording: ""
-start: "0:0:0"
-reading: "coding-style"
-breakoutsoln: ""
-output:
-  xaringan::moon_reader:
-    css: xaringan-themer.css
-    nature:
-      titleSlideClass: ["left", "middle", "inverse"]
-      highlightStyle: tomorrow-night-blue
-      highlightLanguage: rmarkdown
-      highlightLines: false
----
+
 
 background-color: #84754e
 class: title-slide, center, inverse, middle
 
-.small[*Saying [researchers] should spend more time thinking about the way they write code would be like telling a novelist that she should spend more time thinking about how best to use Microsoft Word. Sure, there are people who take whole courses in how to change fonts or do mail merge, but anyone moderately clever just opens the thing up and figures out how it works along the way.* </br> *This manual began with a growing sense that our own version of this self-taught seat-of-the-pants approach to computing was hitting its limits.*]
-</br> </br> .small[Gentzkow and Shapiro </br> [__Code and Data for the Social Sciences: A Practitioner’s Guide__](https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf)]
+.small[*Saying [researchers] should spend more time thinking about the way they write code would be like telling a novelist that she should spend more time thinking about how best to use Microsoft Word. Sure, there are people who take whole courses in how to change fonts or do mail merge, but anyone moderately clever just opens the thing up and figures out how it works along the way.* &lt;/br&gt; *This manual began with a growing sense that our own version of this self-taught seat-of-the-pants approach to computing was hitting its limits.*]
+&lt;/br&gt; &lt;/br&gt; .small[Gentzkow and Shapiro &lt;/br&gt; [__Code and Data for the Social Sciences: A Practitioner’s Guide__](https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf)]
 
 ???
 
@@ -32,47 +39,13 @@ Why spend a lecture on coding style if everyone here already knows how to code?
 * Software based on clear code is easier to maintain.
 * Clear code is easier to extend.
 
-```{r xaringan-themer, include=FALSE, warning=FALSE}
-library(xaringanthemer)
 
-extra_css <- list(
-  ".small" =  list(`font-size` = "80%"),
-  ".large" =  list(`font-size` = "150%"),
-  "ul li" = list(`margin-bottom` = "10px"),
-  ".red" = list(color = "#da291c",
-                `font-weight` = "600"),
-  ".green" = list(color = "#348338",
-                `font-weight` = "600"),
-  ".code-box" = list(display = "inline-block", 
-    width = "95%",
-    `line-height` = "1em",
-    padding = "5px",
-    `font-size` = "80%",
-    `background-color` = "#f6f6f6",
-    `align-items` = "left",
-    `font-family` = "Courier Prime",
-    border = "1px solid black"),
-  "ul" = list(`margin-bottom` = "0.5em",
-              `margin-top` = "0.5em"),
-  "p" = list(`margin-bottom` = "0.25em"),
-  "a" = list(color = "#007dba"),
-  "a:hover" = list("text-decoration" = "underline")
-)
 
-style_mono_accent(
-  base_color = "#012169",
-  header_font_google = google_font("DM Sans"),
-  text_font_google   = google_font("DM Sans", "400", "400i"),
-  code_font_google   = google_font("Courier Prime"),
-  extra_css = extra_css
-)
-```
-
-<style type="text/css">
+&lt;style type="text/css"&gt;
 .remark-slide-content {
     font-size: 22px
 }
-</style>
+&lt;/style&gt;
 
 ---
 
@@ -145,7 +118,8 @@ Get the code working and readable first, optimize and generalize later.
 
 ### Think before you code
 
-```{r, show-example-thought, eval = FALSE}
+
+```r
 # Averaging over drtmle option:
 #   Instantiate empty lists 
 #   Note: length = 1 if n_SL = 1 or "drtmle" not in avg_over):
@@ -188,7 +162,7 @@ Just this careful thought process can lead to solutions for challenging problems
 Don't repeat yourself (DRY) is a fundamental concept in programming. 
 * *Ruthlessly eliminate duplication*, [Wilson et al](https://swcarpentry.github.io/good-enough-practices-in-scientific-computing/)
 
-For example, variables `score1=1`, `score2=2`, `score3=3` &#8594; `score=list(1,2,3)`. 
+For example, variables `score1=1`, `score2=2`, `score3=3` &amp;#8594; `score=list(1,2,3)`. 
 
 If you write the same code more than once, it should be a function. 
 * Break large tasks into smaller calls to functions. 
@@ -237,7 +211,7 @@ Use __function arguments__ to handle different cases.
 
 Do you hear your collaborators making an arbitrary decision in the analysis plan? Prepare for that decision to change. 
 
-An example: in [a recent paper](https://www.sciencedirect.com/science/article/pii/S1047279720301769), we looked at county-level characteristics by proportion of county that was African-American. The analysis started looking at </> 13% (the national average). This was an arbitrary choice made at the outset of the analysis. So when I wrote the code to produce summary statistics stratifying on this characteristic, I wrote it so one could provide any arbitrary number/s and obtain characteristics. Eventually, they wanted to see it broken down by 13/25% and by 13/25/50%. They ended up not liking the look of the tables, so we went back to </>13 (trivial). For me, all I needed to do was change __a single function input__. This was a (rare) success story for me in generalizing code. The code to make this table is [here](https://github.com/benkeser/covid-and-race/blob/master/Code/01_tablefunctions.R).
+An example: in [a recent paper](https://www.sciencedirect.com/science/article/pii/S1047279720301769), we looked at county-level characteristics by proportion of county that was African-American. The analysis started looking at &lt;/&gt; 13% (the national average). This was an arbitrary choice made at the outset of the analysis. So when I wrote the code to produce summary statistics stratifying on this characteristic, I wrote it so one could provide any arbitrary number/s and obtain characteristics. Eventually, they wanted to see it broken down by 13/25% and by 13/25/50%. They ended up not liking the look of the tables, so we went back to &lt;/&gt;13 (trivial). For me, all I needed to do was change __a single function input__. This was a (rare) success story for me in generalizing code. The code to make this table is [here](https://github.com/benkeser/covid-and-race/blob/master/Code/01_tablefunctions.R).
 
 ---
 
@@ -252,9 +226,9 @@ There are __many decision points__ in an analysis. Give them a name!
   * `tol_missingness = 3`
 
 Even better, include them as an __argument to a function__ (with default values and documentation, as needed)!
-* `get_bootstrap_ci <- function(..., nboot = 1e3)`
-* `my_algorithm <- function(..., tol_convergence = 1e-3)`
-* `rm_missing_data <- function(..., tol_missingness = 3)`
+* `get_bootstrap_ci &lt;- function(..., nboot = 1e3)`
+* `my_algorithm &lt;- function(..., tol_convergence = 1e-3)`
+* `rm_missing_data &lt;- function(..., tol_missingness = 3)`
 
 ---
 
@@ -283,34 +257,36 @@ If you're ever porting code from Windows to Unix and you get weird errors about 
 
 .large[🤮]
 
-```{r}
+
+```r
 # move values above/below quantiles to those quantiles
-winsorize<-function(vec,q=0.006){
-lohi<-quantile(vec,c(q,1-q),na.rm=TRUE)
-if(diff(lohi)<0)lohi<-rev(lohi)
-vec[!is.na(vec)&vec<lohi[1]]<-lohi[1]
-vec[!is.na(vec)&vec>lohi[2]]<-lohi[2]
+winsorize&lt;-function(vec,q=0.006){
+lohi&lt;-quantile(vec,c(q,1-q),na.rm=TRUE)
+if(diff(lohi)&lt;0)lohi&lt;-rev(lohi)
+vec[!is.na(vec)&amp;vec&lt;lohi[1]]&lt;-lohi[1]
+vec[!is.na(vec)&amp;vec&gt;lohi[2]]&lt;-lohi[2]
 vec}
 ```
 
 .large[😍]
 
-```{r}
+
+```r
 # move values above/below quantiles to those quantiles
-winsorize <- function(vec, q = 0.006){
-  lohi <- quantile(vec, c(q, 1 - q), na.rm = TRUE)
-  if(diff(lohi) < 0){
-    lohi <- rev(lohi)
+winsorize &lt;- function(vec, q = 0.006){
+  lohi &lt;- quantile(vec, c(q, 1 - q), na.rm = TRUE)
+  if(diff(lohi) &lt; 0){
+    lohi &lt;- rev(lohi)
   }
-  vec[ !is.na(vec) & (vec < lohi[1]) ] <- lohi[1]
-  vec[ !is.na(vec) & (vec > lohi[2]) ] <- lohi[2]
+  vec[ !is.na(vec) &amp; (vec &lt; lohi[1]) ] &lt;- lohi[1]
+  vec[ !is.na(vec) &amp; (vec &gt; lohi[2]) ] &lt;- lohi[2]
   return(vec)
 }
 ```
 
 ???
 
-The parenthesis around `vec < lohi[1]` are probably unnecessary, but want to illustrate the point. 
+The parenthesis around `vec &lt; lohi[1]` are probably unnecessary, but want to illustrate the point. 
 
 ---
 
@@ -370,21 +346,23 @@ This is really __hard to do__.
 
 Here's an example of .red[bad code]:
 
-```{r}
-tmp1 <- 9.81
-tmp2 <- 5
-tmp3 <- 0.5 * tmp1 * tmp2^2
+
+```r
+tmp1 &lt;- 9.81
+tmp2 &lt;- 5
+tmp3 &lt;- 0.5 * tmp1 * tmp2^2
 ```
 
 Here's an example of .green[documented] .red[bad code]:
 
-```{r}
+
+```r
 # gravitational constant
-tmp1 <- 9.81
+tmp1 &lt;- 9.81
 # time object is falling
-tmp2 <- 5
+tmp2 &lt;- 5
 # displacement of the object
-tmp3 <- 0.5 * tmp1 * tmp2^2
+tmp3 &lt;- 0.5 * tmp1 * tmp2^2
 ```
 
 ???
@@ -399,19 +377,21 @@ The second chunk is better; at least it is documented! But it's redundant and no
 
 Here's .green[self-documenting code]:
 
-```{r}
-gravitational_force <- 9.81
-time_in_seconds <- 5
-displacement <- 1/2 * gravitational_force * time_in_seconds^2
+
+```r
+gravitational_force &lt;- 9.81
+time_in_seconds &lt;- 5
+displacement &lt;- 1/2 * gravitational_force * time_in_seconds^2
 ```
 
 Now let's add a .green[comment] explaining the __why__:
 
-```{r}
+
+```r
 # compute displacement of falling object with Newton's equation
-gravitational_force <- 9.81
-time_in_seconds <- 5
-displacement <- 1/2 * gravitational_force * time_in_seconds^2
+gravitational_force &lt;- 9.81
+time_in_seconds &lt;- 5
+displacement &lt;- 1/2 * gravitational_force * time_in_seconds^2
 ```
 
 ---
@@ -420,12 +400,13 @@ displacement <- 1/2 * gravitational_force * time_in_seconds^2
 
 Even better, .green[make it a function]!
 
-```{r}
+
+```r
 # for falling objects based on Newton's equation
-compute_displacement <- function(time_in_seconds){
-  gravitational_force <- 9.81
-  time_in_seconds <- 5
-  displacement <- 1/2 * gravitational_force * time_in_seconds^2
+compute_displacement &lt;- function(time_in_seconds){
+  gravitational_force &lt;- 9.81
+  time_in_seconds &lt;- 5
+  displacement &lt;- 1/2 * gravitational_force * time_in_seconds^2
   return(displacement)
 }
 ```
@@ -456,3 +437,122 @@ Why spend a lecture on coding style if everyone knows how to code?
 * Software based on clear code is __easier to maintain__.
 * Clear code is __easier to extend__.
 
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "tomorrow-night-blue",
+"highlightLanguage": "rmarkdown",
+"highlightLines": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

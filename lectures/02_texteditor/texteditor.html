@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Text editors</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="David Benkeser, PhD MPH   Emory University  Department of Biostatistics and Bioinformatics " />
+    <script src="texteditor_files/header-attrs-2.14/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
+
+.title[
+# Text editors
+]
+.author[
+### David Benkeser, PhD MPH<br> <span style="font-size: 50%;"> Emory University<br> Department of Biostatistics and Bioinformatics </span>
+]
+.date[
+### Introduction Reproducible Workflows in R<br><br><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg> <a href="https://bit.ly/intro_repro_workflo">.white[bit.ly/intro_repro_workflo]</a> <br> <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"/></svg> <a href="https://benkeser.github.io/intro_repro_workflo/readings#text-editors">.white[Additional reading]</a>
+]
+
+---
+
+
+
+&lt;style type="text/css"&gt;
+.remark-slide-content {
+    font-size: 23px
+}
+&lt;/style&gt;
+
+## Important principle 
+
+.center[
+  .large[
+    Don't touch that mouse!
+  ]
+]
+
+???
+
+Pointing-and-clicking is not reproducible! 
+
+Moreover, every time you have to reach for the mouse, there's a 
+loss of efficiency. Saving 1 second on something you do 50 times a
+day means saving about five hours per year. You're going to be writing
+code the rest of your career. Ten years from now, do you want to look
+back and realize you spent two days of time reaching to and from your mouse?
+
+---
+
+## Choosing an editor
+
+A good editor...
+* does not require pointing and clicking;
+* makes it easy to get code to `R` (or a terminal, etc...);
+* has syntax highlighting;
+* indents code automatically;
+* simultaneously view code across files; 
+* has a full suite of (customizable) hot keys.
+
+.red[Microsoft Word is not a good editor.]
+
+???
+
+The choice of an editor is personal. Some people take the choice of editor
+far too seriously (like on the next slide, where my distaste for RStudio will
+undoubtedly spill over). Most editors these days can be customized in myriad ways, 
+such that the difference between editors is becoming smaller. 
+
+---
+
+## Good editors
+
+* [Sublime Text](https://www.sublimetext.com/)
+* [VS Code](https://code.visualstudio.com/)
+* [atom](https://atom.io/)
+* [Notepad++](https://notepad-plus-plus.org/downloads/)
+* [vim](https://www.vim.org/)
+* [emacs](https://www.gnu.org/software/emacs/)
+
+I use Sublime Text 97% and vim 3%. 
+* Work remotely? Know *at least some* vim or emacs.
+
+RStudio is an OK editor for `R`-related tasks. 
+* There are better options (in my opinion). 
+
+???
+
+See [course readings](https://benkeser.github.io/info550/readings#text-editors) for more resources. 
+
+---
+
+## Hot keys
+
+Make yourself start using them now!
+* Not just in your text editor.
+* Moving between browser tabs, applications, etc...
+* Don't touch that mouse!
+
+???
+
+Your work productivity hinges on how fast you can operate a computer. 
+Force yourself to learn to be more efficient. It's frustrating at first --
+I can't tell you how many times I've googled "sublime hotkey for ...". 
+But make it part of your routine. 
+
+---
+
+## Hot keys
+
+Know how to:
+* save, save all (and do, __after every command__!)
+* open file (better: navigate open file directory panel)
+* undo/redo
+* move between tabs/panes/applications
+* highlight a word/the next word/the line
+* highlight all instances of a word
+* copy/cut/paste words/lines
+* duplicate lines
+
+???
+
+I compulsively hit the hot key for save when I'm typing anywhere. Learn to 
+do that and you'll save yourself a lot of pain. 
+
+Be annoyed every time you have to touch your mouse. Ask yourself, "What was
+I trying to do when I had to touch the mouse? Can I automate that?" 
+
+As you become more advanced, start shaving off even more time -- "Is there a 
+way I could do this command with two keys instead of one?" Learn new hotkeys!
+Customize your hotkeys (if your editor allows). 
+
+If you use sublime text, learn to navigate through the command palette 
+(super+shift+p), type one or two letters of command.
+
+---
+
+## Hot keys
+
+Know how to...
+* find/replace text in a file/folder
+* find/replace text in a folder
+* cursor to start/end of current line
+* cursor to the next word in a line
+* comment out lines/sections
+* write your own hotkeys! (editor permitting)
+
+---
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+*Don't stress over picking an editor. Commit to one and spend your time really learning how to use it effectively.*
+
+???
+
+Unless you've done a lot of coding in the past, you probably won't really know
+the difference when you start out anyway. My arbitrary recommendations:
+- easiest path? Notepad++
+- best middle ground path? Sublime Text/VS Code
+- feeling adventurous? vim
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

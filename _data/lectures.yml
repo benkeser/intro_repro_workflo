@@ -11,7 +11,7 @@
   dirname: 01_motivation
   filename: motivation
   reading: reproducible-research
-  recording: 14eacd99-52d6-4992-bdce-ad900121700d
+  recording: ''
   recording_url: motivation
   start: 0:0:0
   title: Motivation
@@ -20,7 +20,7 @@
   dirname: 02_texteditor
   filename: texteditor
   reading: text-editors
-  recording: ade65506-5999-4165-97e9-ad90012e4cf2
+  recording: ''
   recording_url: text-editors
   start: 0:0:0
   title: Text editors
@@ -29,7 +29,7 @@
   dirname: 03_commandline
   filename: commandline
   reading: command-line
-  recording: 246dfd8f-c50f-4102-ada2-ad9701187327
+  recording: ''
   recording_url: unix-command-line
   start: 0:0:0
   title: Unix command line
@@ -38,7 +38,7 @@
   dirname: 04_rmarkdown
   filename: rmarkdown
   reading: r-markdown
-  recording: 097aee6b-9898-4b40-8b1c-ada50118a797
+  recording: ''
   recording_url: r-markdown-for-reproducible-reports
   start: 0:0:0
   title: R Markdown for reproducible reports
@@ -47,7 +47,7 @@
   dirname: 07_make
   filename: make
   reading: gnu-makefiles
-  recording: 3675d659-7bb0-48b1-a642-adc101190cbd
+  recording: ''
   recording_url: gnu-make
   start: 0:0:0
   title: GNU Make
@@ -56,7 +56,7 @@
   dirname: 08_codestyle
   filename: codestyle
   reading: coding-style
-  recording: 5f89add5-a50d-4e39-a2bb-adc801199294
+  recording: ''
   recording_url: coding-in-style
   start: 0:0:0
   title: Coding in style
@@ -66,7 +66,7 @@
   dirname: 08_organization
   filename: organization
   reading: project-organization
-  recording: 7a2ff6e6-b5b3-4c17-8d9a-adc8012cdf7a
+  recording: ''
   recording_url: project-organization
   start: 0:0:0
   title: Project organization
