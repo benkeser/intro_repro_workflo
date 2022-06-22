@@ -1,12 +1,13 @@
 #! /bin/bash
 
 REPO_NAME=intro_repro_workflo
+BRANCH=main
 
 # switch to a new temporary branch
 cd ..
 mkdir build_dir
 cd build_dir
-git clone -b master https://github.com/benkeser/$REPO_NAME
+git clone -b $BRANCH https://github.com/benkeser/$REPO_NAME
 cd $REPO_NAME
 export TRAVIS_BUILD_DIR=$(pwd)
 
