@@ -21,9 +21,9 @@
   filename: texteditor
   reading: text-editors
   recording: ''
-  recording_url: text-editors
+  recording_url: text-editors-and-ides
   start: 0:0:0
-  title: Text editors
+  title: Text editors and IDEs
   tldr: Good text editors make your life a lot easier.
 - breakoutsoln: commandline_soln.sh
   dirname: 03_commandline

@@ -44,7 +44,7 @@ class: left, middle, inverse, title-slide
 			&lt;br&gt;
 			&lt;br&gt; We would like to submit this paper by the end of the week.
 			&lt;br&gt;
-			&lt;br&gt; Best wises, 
+			&lt;br&gt; Best wishes, 
 			&lt;br&gt; Every collaborator ever
 		]
 	]
@@ -71,9 +71,9 @@ No copy-pasting from R/SAS/STATA to Word. Just one click.
 			David, 
 			&lt;br&gt;
 			&lt;br&gt; The data will be finalized tomorrow and we need to have 
-			new Tables to the DSMB report in three days. Sorry about that.
+			new Tables to the DSMB report by the end of the day. Sorry about that.
 			&lt;br&gt;
-			&lt;br&gt; Best wises, 
+			&lt;br&gt; Best wishes, 
 			&lt;br&gt; Every collaborator ever
 		]
 	]
@@ -104,7 +104,7 @@ execution AND fast delivery.
 			and your analysis code no longer runs. I get lots of strange 
 			error messages about compilers and package versions. What gives?
 			&lt;br&gt;
-			&lt;br&gt; Best wises, 
+			&lt;br&gt; Best wishes, 
 			&lt;br&gt; Every collaborator ever
 		]
 	]
@@ -129,7 +129,7 @@ this easier to achieve.
 			now when I re-run the code, I get completely different results. 
 			I'm starting to panic. Help!
 			&lt;br&gt;
-			&lt;br&gt; Best wises, 
+			&lt;br&gt; Best wishes, 
 			&lt;br&gt; Every collaborator ever
 		]
 	]
@@ -207,7 +207,7 @@ that any mistakes made were likely honest.
 
 ---
 class: title-slide, center, inverse, middle
-background-color: #d9d9d6
+background-color: #012169
 
 *This is not rocket science. There is computer code that evaluates the algorithm. There is data. And when you plug the data into that code, you should be able to get the answers back that you have reported. And to the extent that you can’t do that, there is a problem in one or both of those items.*
 &lt;div&gt; - Lisa McShane
@@ -286,27 +286,35 @@ So true.
 
 ## Tools for reproducible research
 
-* Unix command line
-* git and online repositories (e.g., GitHub)
-* Markdown, RMarkdown, Latex, Knitr
+__Covered in this course__
+* Command line
+* `bash`, `R`
+* RMarkdown, Latex, Knitr
 * GNU Make
+
+__Other tools__
+* git and online repositories (e.g., GitHub)
 * R packages
 * Containers (e.g., Docker)
-* `bash`, `R`, `python` (`ruby`, `perl`, `html`)
+* `python`, `ruby`, `perl`, `html`
 
 ???
 
-In this class, we'll be learning to operate almost exclusively on 
+In this class, we'll be learning to operate almost on 
 the command line. Soon, [this will be you](https://tenor.com/8IZG.gif). 
 
-Git will make your life easier by handling version control. No more
-directories with 200 copies of the same file with different dates!
+Knowing some `bash` is necessary to operate at the command line and 
+generally useful for scripting. `R` is becoming (or already is) a standard 
+software for analysis.
 
 RMarkdown + knitr are great tools for generating reproducible reports (or
 course notes...). 
 
 GNU Make is for automation and for documenting dependencies between 
 files. 
+
+Git will make your life easier by handling version control. No more
+directories with 200 copies of the same file with different dates!
 
 `R` packages are a useful way to wrap up code, documentation, and dependencies
 on other `R` packages. 
@@ -315,9 +323,7 @@ Containers make it possible to achieve full reproducibility rather
 painlessly, by wrapping all needed software (down to the OS!) up into a 
 "container". 
 
-Knowing some `bash` is necessary to operate at the command line and 
-generally useful for scripting. `R` is becoming (or already is) a standard 
-software for analysis. `python` is also becoming quite popular for analysis, 
+`python` is also becoming quite popular for analysis, 
 but goes much beyond. Other languages are great, but not totally necessary.
 
 ---
