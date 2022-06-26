@@ -1,0 +1,59 @@
+---
+title: VRC01 neutralization report
+author: David Benkeser
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+output:
+  html_document:
+    toc: true
+    highlight: haddock
+---
+
+# Exploring markdown
+
+Markdown is a way of writing plain text that, upon rendering, looks formatted.
+
+For example, we can __bold text__ or *italicize* it.
+
+We can also ~~strikethrough text~~.
+
+Sometimes `monospace font` is nice for formatting as well.
+
+## Subheadings are fun too
+
+### Even smaller subheadings are also possible
+
+We can create bullet points:
+
+* that is pretty helpful
+* for listing things
+
+We can create numbered lists:
+
+1. item number 1
+2. item number 2
+
+We can also [include hyperlinks](www.emory.edu).
+
+# Including R code
+
+There are two options for inputting code in R Markdown.
+
+## Code chunks
+
+```{r, name-of-chunk}
+print("hello from R!")
+```
+
+```{r, read-data}
+# replace with your own
+abs_file_path <- "~/Dropbox/Emory/Teaching/DSTK/intro_repro_workflo/lectures/04_rmarkdown/"
+full_file_path <- paste0(
+  abs_file_path, "hiv_project/data/vrc01_data.csv"
+)
+data <- read.csv(full_file_path, header = TRUE)
+head(data)
+```
+
+## Inline R expressions
+
+We can use inline `R` expressions to report numbers in the text. For example, `vrc01_data.csv` has `r nrow(data)` rows and `r ncol(data)` columns.

@@ -4,7 +4,7 @@
     <title>Unix command line</title>
     <meta charset="utf-8" />
     <meta name="author" content="David Benkeser, PhD MPH   Emory University  Department of Biostatistics and Bioinformatics " />
-    <script src="commandline_files/header-attrs-2.7/header-attrs.js"></script>
+    <script src="commandline_files/header-attrs-2.9/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -13,7 +13,7 @@ class: left, middle, inverse, title-slide
 
 # Unix command line
 ### David Benkeser, PhD MPH<br> <span style="font-size: 50%;"> Emory University<br> Department of Biostatistics and Bioinformatics </span>
-### INFO550<br><br><svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#ffffff;" xmlns="http://www.w3.org/2000/svg"> <path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg> <a href="https://bit.ly/info550">.white[bit.ly/info550]</a> <br> <svg viewBox="0 0 448 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#ffffff;" xmlns="http://www.w3.org/2000/svg"> <path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"></path></svg> <a href="https://benkeser.github.io/info550/readings#reproducible-research">.white[Additional reading]</a> <br> <svg viewBox="0 0 640 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#ffffff;" xmlns="http://www.w3.org/2000/svg"> <path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"></path></svg> <a href="commandline.sh" download="commandline.sh" style="color:white">Code chunks</a>
+### Introduction Reproducible Workflows in R<br><br><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg> <a href="https://bit.ly/intro_repro_workflo">.white[bit.ly/intro_repro_workflo]</a> <br> <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"/></svg> <a href="https://benkeser.github.io/intro_repro_workflo/readings#command-line">.white[Additional reading]</a>
 
 ---
 
@@ -25,28 +25,12 @@ class: left, middle, inverse, title-slide
 }
 &lt;/style&gt;
 
-## Operating systems
-
-* Windows
-  * Not programmer friendly
-* Mac OSX
-  * Better for programming
-  * Under the hood, is just unix
-* Unix-based OS (Linux, Solaris, etc...)
-  * Best for programming
-
-We'll learn to interact with our computer like it's a Unix OS. 
-* Best practices for programming
-* Uniformity for pedagogical purposes
-* Needed for AWS and Docker (later)
-
----
-
 ## Some terminology
 
 __Shell__
 * user interface for interacting with a computer
 * the "outermost" layer of the operating system
+* prompts users for input, interprets input, and handles output from the operating system
 
 __Graphical user interface__ (GUI)
 * visual interface (icons, menus, etc...) for interacting with computer
@@ -54,16 +38,14 @@ __Graphical user interface__ (GUI)
 
 __Command line interface__ (CLI)
 * text-based interface for interacting with computer
-* e.g., `bash`, `sh`, `tcsh`, `zsh`, ...
+* Shell languages: `bash`, `sh`, `tcsh`, `zsh`, ...
 
 ???
 
-As I'll say many times, I am not a computer scientist, so I may say
+I am not a computer scientist, so I may say
 something stupid here. Please correct me if you know better!
 
-GUIs are pretty and user-friendly because anyone who can read and operate
-a mouse can interact with them, even with very little about computers. 
-However, they are antithetical to our endeavor for reproducible research.
+GUIs are pretty and user-friendly because anyone who can read and operate a mouse can interact with them, even with very little about computers. However, they are antithetical to our endeavor for reproducible research.
 
 We will instead rely on the CLI to run all our programs. We will focus on 
 `bash`, mostly because it's all that I know. People also seem to like `zsh`. 
@@ -83,17 +65,17 @@ __Important principle:__ Everything scripted!
 
 ???
 
-Scripts are the ultimate "paper trail". We can scrutinize the script
-to see exactly what the computer was told to do. We are working toward
-scripting all aspects of data cleaning, analysis, and report generation. 
+Scripts are the ultimate "paper trail". We can scrutinize the script to see exactly what the computer was told to do. We are working toward scripting all aspects of data cleaning, analysis, and report generation. 
 
 ---
 
 ## Terminal
 
-If Windows, use [Ubuntu](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab) for Windows
-* Or other Linux distribution (e.g., [Debian](https://www.microsoft.com/en-us/p/debian/9msvkqc78pk6?rtc=1&amp;activetab=pivot:overviewtab))
-* Biggest difference is how software installed
+If Windows, you can:
+* download `git`, which includes `git bash` and a terminal application
+  * be sure to set RStudio terminal to `git bash`
+* download Windows Subsystem for Linux (WSL2)
+  * probably overkill for most users
 
 &lt;div&gt;
 
@@ -106,13 +88,9 @@ If Linux, whatever terminal emulator comes with your distribution.
 
 ???
 
-I use Terminal, but should probably switch to iTerm2. 
+`git` is a full blown program (application) that runs on Unix-like operating systems (this includes Mac OsX and Linux distributions). `git bash` is not full blown `bash`, but it provides a very similar set of tools. If, for whatever reason, full blown `bash` is desirable, download WSL.
 
-Linux on Windows is a relatively new feature. I suggest Ubuntu or Debian
-as these are the most common distributions on resources you might use. 
-There's practically little difference for our purposes. Most of my 
-examples later will likely use Ubuntu though, so if you have no strong
-preference, then I'd stick to that. 
+I use Terminal, but should probably switch to iTerm2. 
 
 ---
 
@@ -132,53 +110,38 @@ shell (and you want it to be) this can be changed in Terminal settings.
 
 ## Moving around directories
 
+By default, the terminal emulator will act like a file viewer.
+
 | __Command__   | __Action__                   |
 |:-------------:|------------------------------|
 | `pwd`         | print working directory      |
 | `cd`          | change directory             |
 | `ls`          | list files in directory      |
+| `~`           | shortcut for home directory  |
 
-&lt;div&gt;
-
-.pull-left[.center[
-Absolute paths
-* .left[`/Users/davidbenkeser`]
-* .left[`~/Documents`]
-* .left[`/`]
-]]
-
-.pull-right[.center[
-Relative paths
-* .left[`./Documents`]
-* .left[`../Documents`]
-* .left[`../../`]
-]]
 
 ???
 
-The next few slides are boring, but we will use these basic commands
-to illustrate how we interact with the shell. 
+The symbol `~` points to your designated home directory on your system.
 
-Use these commands to explore file structures.
+---
 
-Absolute paths include the __whole path__ for a directory. The `~` 
-symbol refers to the current users home directory. Execute `eval echo ~$USER`
-to print its location. `/` takes you to the root directory. 
+class: title-slide, center, inverse, middle
+background-color: #487f84
 
-Relative paths depend on the working directory that they are executed in.
-The `./` means "in the current directory". The `../` means "in one directory
-up from the current directory". The `../../` means "in two directories up
-from current directory". 
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Finding files]
+]
 
-When we get to project management, we will prefer relative paths. It makes
-sharing code easier -- between different users or, with yourself, on a 
-difference computer (e.g., your laptop vs. AWS). The two file systems are probably 
-(definitely) structured differently, but if they share a  project folder with 
-the same relative structure, then code with relative paths should still work.
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="finding_files.zip" style="color:#ffffff" download&gt;Code&lt;/a&gt;
+]
 
 ---
 
 ## Adding/removing files
+
+Use these commands to make, rename, remove files.
 
 | __Command__     | __Action__                   |
 |:---------------:|------------------------------|
@@ -186,8 +149,111 @@ the same relative structure, then code with relative paths should still work.
 | `rm`            | delete a file or directory   |
 | `mv`            | move a file or directory     |
 | `cp`            | copy a file or directory     |
+| `touch`         | make an empty file           |
+
+???
+
+`touch` used on an existing file will modify the "last accessed" attribute of that file.
+
+Use `rm -rf` to get delete folders
 
 ---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Manipulating files]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> &lt;a href="finding_files.zip" style="color:#ffffff" download&gt;Code&lt;/a&gt;
+]
+
+---
+
+## Previewing contents of files
+
+There are two easy ways to view contents of files without opening the files themselves.
+
+`cat [filename]`
+* prints all the contents of file to terminal
+
+`less [filename]`
+* browse file line-by-line using arrows and/or page up/down
+* press `q` on keyboard to close preview
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Previewing files]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> &lt;a href="finding_files.zip" style="color:#ffffff" download&gt;Code&lt;/a&gt;
+]
+
+???
+
+Demo: `less code/02_example.R` vs. `cat code/02_example.R`
+
+---
+
+## Moving around directories
+
+.pull-left[.center[
+.large[__Absolute paths__]
+* .left[`/c/Users/davidbenkeser` (git bash)]
+* .left[`/Users/davidbenkeser` (MacOSX)]
+* .left[`~/Documents` (both)]
+* .left[`/` (both, but different)]
+]]
+
+.pull-right[.center[
+.large[__Relative paths__]
+* .left[`Documents`]
+* .left[`./Documents`]
+* .left[`../Documents`]
+* .left[`../../`]
+]]
+
+???
+
+Relative paths are **relative** to the current working directory.
+
+Absolute paths point to an **absolute** location of a file.
+
+The `./` means "in the current directory". The `../` means "in one directory up from the current directory". The `../../` means "in two directories up
+from current directory". 
+
+When we get to project management, we will prefer relative paths. It makes sharing code easier -- between different users or, with yourself, on a different computer (e.g., your laptop vs. AWS). The two file systems are probably (definitely) structured differently, but if they share a  project folder with the same relative structure, then code with relative paths should still work.
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Absolute vs. relative path]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> &lt;a href="finding_files.zip" style="color:#ffffff" download&gt;Code&lt;/a&gt;
+]
+
+???
+
+Demo: from `finding_files` directory, `cat code/00_example.R` in a few different ways: 
+1. using relative path from `finding_files` 
+2. using absolute path from root directory 
+3. using absolute path from home directory
+4. using relative path from `../finding_files`
+
+---
+
 
 ## Commands structure
 
@@ -202,6 +268,8 @@ the same relative structure, then code with relative paths should still work.
 
 To see available options check `man command`.
 
+Example: `ls -l`
+
 ???
 
 The `man`'s for the various commands are sometimes not as helpful
@@ -212,169 +280,54 @@ as `ls -l -a`.
 
 ---
 
-## Solving computing problems
+## Solving command line problems
 
-* `man [command]` 
+Shell languages like `bash` feel weird.
+* Very different than e.g., `R` or SAS programming.
+
+How to get help?
+* `man [command]` (bash)
+* `[command] -help` (git bash)
 * Google (with `site:stackoverflow.com`?)
-* Ask friends/classmates
 * .red[Try stuff!]
 
-Breakout exercises are designed to force you to try new things.
-* Learning how to learn!
-
 ???
 
-I find manuals for Unix commands are often cryptic and not always helpful. 
-Reading them on occasion is still useful. 
+I find manuals for Unix commands are often cryptic and not always helpful. Reading them on occasion is still useful. 
 
-Learning to code is a lot like a learning a language. It can be very
-frustrating that you know *what* you want to say, but you don't know 
-*how* to say it (or you know how, but in another language!). You only
-get better at language by forcing yourself to use it.
+Learning to code is a lot like a learning a language. It can be very frustrating that you know *what* you want to say, but you don't know *how* to say it (or you know how, but in another language!). You only get better at language by forcing yourself to use it.
 
-Don't be satisfied with just copy/pasting an answer from StackOverflow. 
-Try (for at least a couple minutes) to understand how it works. This is 
-a worthwhile investment. 
+Don't be satisfied with just copy/pasting an answer from StackOverflow. Try (for at least a couple minutes) to understand how it works. This is a worthwhile investment.
 
 ---
 
-## Breakout exercise 1
+## Try it at home
 
-Execute the following code:
+Using `bash` help files/the internet figure out how to...
 
-```bash
-# make a directory named tmp
-mkdir tmp
-# move into tmp 
-cd tmp
-# add an empty file named tmp_file
-touch tmp_file
-# add an empty directory named another_tmp
-mkdir another_tmp
-# add an empty file to another_tmp directory
-touch another_tmp/another_tmp_file
-```
-* In your breakout group, figure out how to...
-  * list all files with sizes displayed in bytes/kilobyes/megabytes
-  * remove `tmp_file`
-  * rename `another_tmp_file` to `such_a_cool_file`
-  * remove `tmp` directory *and* all its contents
+1. from the `code` directory, list all files stored in `code` with sizes displayed in bytes/kilobyes/megabytes
+
+2. from `finding_files directory`, list all files stored in `code` with sizes displayed in bytes/kilobyes/megabytes
+
+3. remove the `data` directory and all its contents
+
+4. rename `00_example.R` to `03_example.R`
+
+Press "p" to see solutions.
 
 ???
 
-~ 7 minutes.
-
----
-
-## `.bash_profile`
-
-`.bash_profile` is a plain text file that makes your life easier. 
-* set `PATH` variable
-* make `alias`'es for common commands 
-
-Example:
-
-```bash
-# modify PATH
-export PATH=.:/usr/local/bin:$PATH
-# shortcut for listing
-alias ll='ls -lh'
-# shortcut for opening chrome from browser
-alias chrome="open -a 'Google Chrome'"
-```
-
-.red[Use of aliases within your code can create reproducibility issues!]
-
-???
-
-The most important aspect of your bash_profile is `PATH`. This variable 
-defines the set of directories where the shell will look for executable 
-programs. In other words, when you give the shell a command, these are 
-the folders where the computer "looks" to figure out how to execute that
-command. 
-
-We can add `.` (the current directory) to the path to be able to execute
-shell scripts with commands like `myscript.sh` instead of `./myscript.sh`.
-
-Aliases are convenient for interactively operating with the shell; 
-however, avoid using aliases in scripts that you will share, as the 
-execution of those scripts is now reliant on having the same bash_profile
-across multiple machines. 
-
----
-
-## Redirects and pipes
-
-| __Command__     | __Action__                              |
-|:---------------:|-----------------------------------------|
-| `&gt;`             | redirect output to file                 |
-| `&gt;&gt;`            | redirect output and append to file      |
-| `&lt;`             | have input come from a file             |
-| &lt;code&gt;&amp;#124;&lt;/code&gt; | output of command becomes input of next | 
-
-Piping and redirects give you __flexibility__ in coding. 
-
-???
-
-Here, output means "stdout" and input means "stdin".
-
----
-
-## To bash or not to bash
-
-
-```bash
-# download hamlet text from web and save 
-# in file called hamlet.txt
-curl -L http://bit.ly/hamlet_txt &gt; hamlet.txt
-
-# lines the string "Ham" mentioned
-grep "Ham" hamlet.txt
-
-# lines with "Oph" and "Ham"
-grep "Ham" hamlet.txt | grep "Oph"
-
-# count Hamlet's lines
-grep "Ham\." hamlet.txt | wc -l
-
-# see the start of Hamlet's first 5 lines
-grep "Ham\." hamlet.txt | head -5
-
-# see the start of Hamlet's last line
-grep "Ham\." hamlet.txt | tail -1 
-```
-
-???
-
-`curl` is useful for downloading text files from the web. `-L` means to 
-follow any re-directs.
-
-`wget` also useful for web downloads.
-
-`head`, `tail`, and `wc` are generally useful commands. 
-
----
-
-## Breakout exercise 2
-
-In your breakout group, write bash code that executes each of the following. 
-* find "To be, or not to be" and write the contents of this monologue to a file `speech.txt` (hint: the speech is 35 lines)
-* make a file called `greatest_hits.txt` that includes:
-  * the "To be, or not to be" speech
-  * the line that includes "know not what we may be"
-  * all lines that include the word "doubts" or "Doubts"
-* replaces all instances of the string "doubts" with "uncertainties" in your `greatest_hits.txt` file (hint: `sed` or `awk`)
-
-???
-
-`sed` and `awk` are more flexible than `grep`, but I find the syntax very cryptic and
-difficult to remember. I often have to Google to remind myself how it works.
-
-~ 10-15 min
+__Solutions__:
+1. Use `cd` to navigate to the `code` directory. Then run `ls -lh`
+2. Use `cd` to navigate to the `finding_files` directory. Then run `ls -lh code`
+3. From the `finding_files` directory run `rm -rf data`
+4. From the `code` directory run `mv 00_example.R 03_example.R`
 
 ---
 
 ## Wild cards
+
+Wild cards are helpful for searching through files.
 
 | __Command__     | __Action__                              |
 |:---------------:|-----------------------------------------|
@@ -382,19 +335,30 @@ difficult to remember. I often have to Google to remind myself how it works.
 | `?`, `??`, ...  | match a single character                |
 | `[...]`         | match a range of characters             |
 
+---
 
-```bash
-# files in cwd with .txt extension
-ls -l *.txt
-# all files in cwd named a_file with three character extension
-ls a_file.???
-# .txt files in cwd name a_file, b_file, ..., e_file
-ls [a-e]_file.txt
-```
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Wildcards]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> &lt;a href="finding_files.zip" style="color:#ffffff" download&gt;Code&lt;/a&gt;
+]
+
+???
+
+Demo: 
+1. `ls code/*.R` = all `.R` files in `code`
+2. `ls code/0[0-2]_example.R`
+3. `ls code/0?_example.R`
+4. `ls code/0?_*.R`
 
 ---
 
-## Moving around command line
+## Quality of life keys
 
 | __Key stroke__         | __Action__                              |
 |:----------------------:|-----------------------------------------|
@@ -412,231 +376,74 @@ If you take nothing else from this page, remember to use `tab`!
 
 ---
 
-## Variables
+class: title-slide, center, inverse, middle
+background-color: #487f84
 
-Variables are 
-* assigned using `=` ;
-* referenced using `$` (possibly with `${}`).
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Quality of life]
+]
 
-
-```bash
-# bad -- no spaces!
-a = "some"
-# good
-a="some"
-
-# references a
-echo a
-echo $a
-echo "The value of a is $a"
-
-# curly braces are for avoiding ambiguity
-echo "I am printing $athing"
-echo "I am printing ${a}thing"
-```
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> &lt;a href="finding_files.zip" style="color:#ffffff" download&gt;Code&lt;/a&gt;
+]
 
 ???
 
-Remember the command structure: `a = 12` gets interpreted as "run command 
-`a` with options `=` and `12`".
+Demo of tab completion
+1. From `finding_files`, type `cd c` and press tab
+2. From `finding_files`, type `cd d` and press tab
+3. From `code`, type `0` and press tab. What happens?
+4. Press tab again to list possible files
+
+Demo of up and down arrows
+1. Press up and down arrows to scroll through commands you just executed.
+
+Demo of `ctrl + c`
+1. Type `sleep 3` to demonstrate `sleep` command
+2. Type `sleep 100` and then hit `ctrl + c` to kill the command
 
 ---
 
-## More tools
+## Try it at home
 
-`$(command)` executes `command` and returns its output.
+`bash` and shell scripting could be an entire course by themselves.
 
-
-```bash
-# a sequence
-seq 1 10
-# save the sequence as a variable
-my_sequence=$(seq 1 10)
-echo $my_sequence
-```
-
-`(())` performs operations. 
-
-
-```bash
-b=$((12 + 2))
-((b + 2))
-((b++))
-```
-
-???
-
-Execute the code above and check the value of `b` after each line to see 
-how its value changes.
-
+See [additional readings](https://benkeser.github.io/intro_repro_workflo/readings#command-line) for more resources.
 
 ---
 
-## More tools
+## Running code from command line
 
-Using `for` loops:
+In this short course, we will primarily use the command line to run `R` code.
 
+The command to do this is:
+.center[`Rscript [path to .R file]`.]
 
-```bash
-for name in Ronald Ozzie Freddie
-do
-  echo "My name is $name."
-done
-```
+To run code directly in `R` from the command line, add `-e` option to `R` or `Rscript command`
 
-`if` statements:
-
-
-```bash
-for i in {1..5}
-do
-  if [ "$i" == "3" ]
-  then 
-    echo "This is a special iteration"
-  else
-    echo "This is iteration $i"
-  fi
-done
-```
-
-???
-
-Note the use of `{1..5}` to generate a sequence
+On Windows, the directory where `R.exe` and `Rscript.exe` were installed should be [added to your PATH](https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/).
 
 ---
 
-## Shell scripts
+class: title-slide, center, inverse, middle
+background-color: #487f84
 
-All scripts will start with a __shebang__. 
-* `#!` followed by file path to program that executes code.
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Running R scripts]
+]
 
-Find where `bash` lives on your computer: 
-
-
-```bash
-which bash
-```
-
-The first line of my shell script will read:
-
-
-```bash
-#! /bin/bash
-```
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> &lt;a href="finding_files.zip" style="color:#ffffff" download&gt;Code&lt;/a&gt;
+]
 
 ???
 
-Remember the importance of `PATH` here. `which` looks through all 
-folders in your `PATH` for an executable named `bash`. 
+Demo:
+1. run `Rscript code/00_example.R`
+2. run `cd code &amp;&amp; Rscript 00_example.R`
+3. run `R -e print("hello world")`
+4. run `Rscript -e print("hello world")`
 
----
-
-## Shell scripts
-
-Example bash script:
-
-
-```bash
-#! /bin/bash
-# comments use # symbol
-# you may need to replace shebang!
-
-# define a variable
-a="bash"
-
-for i in "very" "so much" "incredibly"
-do
-  echo "$a is $i fun"'!'
-done
-```
-
-Save this file as `first_script.sh`.
-
-???
-
-Congrats, you've written your first shell script!
-
----
-
-## Shell scripts
-
-Tell the shell that it is allowed to execute `first_script.sh`
-
-
-```bash
-chmod +x first_script.sh
-```
-
-Execute first script: 
-
-
-```bash
-first_script.sh
-```
-
-???
-
-If `.` is not in your path, then you need to execute `./first_script.sh`.
-
-After you run the script, notice that the variables created inside the script,
-`a` (and `i` from the loop) are not available to you outside the script. 
-
----
-
-
-## File permissions
-
-If you run `ls -l`, the far left column shows file permissions:
-* e.g., `-rw-r--r--` or `drwxr-xr-x`
-
-First character is __file type__. Then comes __read__ (`r`), __write__ (`w`), and execute (`x`) permissions for __user__, __group__, __others__.
-
-Executing `+x` (essentially) makes the file executable for everyone.
-
-See slide notes for more options for `chmod`.
-
-???
-
-Often, you'll see commands like `chmod 755 file.sh`. To understand this way 
-of setting permissions, think about a series of bits (how the computer 
-interprets your settings): 
-
-`rwx rwx rwx = 111 111 111`  
-`rw- rw- rw- = 110 110 110`  
-`rwx --- --- = 111 000 000`  
-and so on...  Thus,  
-`rwx = 111`, which in binary = 7  
-`rw- = 110`, which in binary = 6  
-`r-x = 101`, which in binary = 5  
-`r-- = 100`, which in binary = 4  
-`--- = 000`, which in binary = 0  
-
-Some common values summarized below: 
-
-| __Value__         | __Meaning__                                  |
-|:-----------------:|----------------------------------------------|
-| `777`             | No restrictions. Everyone can do anything.   |
-| `755`             | Owner writes. Everyone can read and execute  |
-| `700`             | Owner can do everything. Others nothing.     |
-| `644`             | Owner can read/write. Others can read only.  |
-
----
-
-## Breakout exercise 3
-
-Write a script that 
-* uses `curl` to download the text of __Romeo and Juliet__ from Project Gutenberg
-  * http://www.gutenberg.org/files/1112/1112.txt ;
-* counts the number of lines for characters Romeo ("Rom."), Juliet ("Jul."), and the Apothecary ("Apoth."); 
-* saves a plain text file that for each of these characters says:
-  * "`[character]` has `[num]` lines".
-
-__Hints__: use `for` loops
-
-
-???
-
-~ 15 min.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

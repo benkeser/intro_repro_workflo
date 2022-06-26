@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>R Markdown for reproducible reports</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="David Benkeser, PhD MPH   Emory University  Department of Biostatistics and Bioinformatics " />
+    <script src="rmarkdown_files/header-attrs-2.14/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
+
+# R Markdown for reproducible reports
+### David Benkeser, PhD MPH<br> <span style="font-size: 50%;"> Emory University<br> Department of Biostatistics and Bioinformatics </span>
+### Introduction Reproducible Workflows in R<br><br><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg> <a href="https://bit.ly/intro_repro_workflo">.white[bit.ly/intro_repro_workflo]</a> <br> <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"/></svg> <a href="https://benkeser.github.io/intro_repro_workflo/readings#r-markdown">.white[Additional reading]</a>
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-slide-content {
+    font-size: 22px
+}
+&lt;/style&gt;
+
+### Background: HIV
+
+&lt;img src="hiv.png" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Background: Antibody binding
+
+[Stewart-Jones et al. (2016)](https://doi.org/10.1016/j.cell.2016.04.010) showed VRC01 antibody may bind with a glycan shield on Env.
+* Some sugars are sticky!
+
+&lt;img src="vrc01_binding.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Background: CATNAP data
+
+The [CATNAP database](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4489231/) contains measurements of HIV resistance to various antibodies.
+
+
+| id| ab_resistance| shield_glycans|region | env_length|
+|--:|-------------:|--------------:|:------|----------:|
+|  1|        -0.921|              3|Asia   |        858|
+|  2|        -2.000|              3|Asia   |        856|
+|  3|         0.382|              5|Asia   |        849|
+|  4|         0.963|              4|Asia   |        855|
+|  5|         0.616|              4|Asia   |        863|
+
+* `ab_resistance` = how well Env resists antibody
+* `shield_glycans` = number of sugars in shield
+* `region` = where virus found
+* `env_length` = total amino acids in Env protein
+
+???
+
+Each row is a distinct virus with a different genetic sequence for the envelope protein.
+
+Here we report just a few characteristics
+
+Sugars are really "potential N-linked glycosylation sites".
+
+---
+
+### Motivation: reproducibility
+
+The goal is to generate a report that:
+* includes basic descriptive information about the data set
+* includes analysis of `ab_resistance ~ shield_glycans`
+
+Reasons to consider reproducibility:
+* publication may require code/data submission
+* may need to update reports if more data are reported in CATNAP
+* may need to use similar analysis for different antibodies
+* ...
+
+---
+
+### R Markdown
+
+__What is R Markdown?__
+* `R` package developed by [RStudio](https://rstudio.com/).
+* blends `R` code chunks, and plain text to generate output
+
+__Why R Markdown__?
+* Reproducible reports
+* Human readable source code
+* Variety of output formats
+* No more .red[copy and paste] for results. 
+
+__How do I R Markdown__?
+* install `R` + `install.packages('rmarkdown')`
+* also need to have [`pandoc` installed](https://pandoc.org/installing.html) (and in `PATH`)
+
+???
+
+If your job involves a heavy amount of data analysis, you will end up creating hundreds if not thousands of reports in your career. Invest the time now to come up with an efficient system for doing this!
+
+Reports made with `rmarkdown` can, in theory, be reproduced by anyone, anywhere.
+* caveat is you need: same R version, packages, not to use absolute paths, etc..
+
+---
+
+### Anatomy of an R Markdown document
+
+R Markdown documents consist of three components:
+
+1\. `yaml` header
+* specifies meta options for the document
+* E.g., title, authors, output format, etc...
+
+2\. Plain text written in markdown
+* plain writing + section headers + tables + ...
+
+3\. `R` code
+* Inline with writing using single tick  
+* Whole "chunk" of code using three ticks
+
+---
+
+### Notes on code demonstrations
+
+Throughout this lecture, we will gradually build up several __R Markdown documents__.
+
+On each code demonstration slide, code is linked 
+* (roughly) what the R Markdown document should look like *at the end* of the demonstration.
+
+All of these reports can be [browsed on GitHub](https://github.com/benkeser/intro_repro_workflo/lectures/04_rmarkdown/hiv_report/tmp_reports)
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[First look at R Markdown]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/01_example_report.Rmd" style="color:#ffffff" download&gt;Code: `01_example_report.Rmd`&lt;/a&gt;
+]
+
+???
+
+Demo: 
+* type out the contents of `tmp_reports/01_example_report.Rmd`
+
+---
+
+## Rendering
+
+For this moment, we are focused on R Markdown itself, so we will render "the easy way".
+* Click "Knit" in R Studio
+* Soon, we will be rendering documents from the __command line__.
+
+You can render to different formats via the dropdown menu.
+* Or change the `output` option in the `yaml` header
+* To render as `.pdf`, must have `LaTeX` installed.
+
+To install LaTeX via `R`: 
+* `install.packages("tinytex")`
+* `tinytex::install_tinytex()`
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[First rendered document]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/01_example_report.Rmd" style="color:#ffffff" download&gt;Code: `01_example_report.Rmd`&lt;/a&gt;
+]
+
+???
+
+Demo: 
+* render as html and review formatting and code, text, and R output
+* render as word document via dropdown and review formatting
+* render as pdf document by changing yaml and review formatting
+
+---
+
+### Output formats
+
+There are [many output formats](https://rmarkdown.rstudio.com/lesson-9.html#documents). Here are a few useful ones (with links to 
+further documentation): 
+.small[
+| `output`                                                                                       | Description                                                                                                            |
+|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| [`html_document`](https://bookdown.org/yihui/rmarkdown/html-document.html)                     | html template with many preset themes                                                                                  |
+| [`pdf_document`](https://bookdown.org/yihui/rmarkdown/pdf-document.html)                       | pdf using LaTex                                                                                                        |
+| [`word_document`](https://bookdown.org/yihui/rmarkdown/word-document.html)                     | MS Word document (can [create custom theme](https://bookdown.org/yihui/rmarkdown-cookbook/word-template.html)) |
+| [`ioslides_presentation`](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)     | HTML5 presentation slides                                                                                              |
+| [`beamer_presentation`](https://bookdown.org/yihui/rmarkdown/beamer-presentation.html)         | pdf presentation slides with beamer                                                                                    |
+| [`powerpoint_presentation`](https://bookdown.org/yihui/rmarkdown/powerpoint-presentation.html) | MS Powerpoint presentation                                                                                             |
+]
+
+---
+
+### yaml header
+
+R Markdown documents begin with a __yaml header__. 
+* "meta-data" for the document
+* options that control __how the document is rendered__
+
+Options can be nested. 
+* don't forget your `:`'s!
+* two spaces, __no tabs__!
+
+Options can include inline `R` code.
+
+???
+
+I am constantly messing up yaml syntax and chasing down mysterious errors. Once you have a header you like, I recommend sticking with it unless you have serious cause to change it. 
+
+There are almost endless options for customizing the looks of documents.
+* Some are native to the type of document being rendered (e.g., LaTex-specific options)
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Updating the yaml header]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/02_example_report.Rmd" style="color:#ffffff" download&gt;Code: `02_example_report.Rmd`&lt;/a&gt;
+]
+
+???
+
+Demo: 
+* 02_example_report.Rmd
+* update yaml header to include inline date
+* update yaml header to include a toc and change code highlighting
+
+---
+
+### Markdown
+
+Use Markdown to format the text and write-up of your analysis.
+* See [Markdown cheatsheet](https://www.markdownguide.org/cheat-sheet/) for options
+
+You can also intersperse LaTeX and/or html.
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Mixing in LaTeX and html]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/03_example_report.Rmd" style="color:#ffffff" download&gt;Code: `03_example_report.Rmd`&lt;/a&gt;
+]
+
+???
+
+Demo: 
+* See `03_example_report.Rmd`
+* Add `&lt;ol&gt;` tag for list in html and render html
+* Add `itemize` for list in LaTeX and render pdf
+
+---
+
+### knitr and pandoc
+
+* [`rmarkdown`](https://rmarkdown.rstudio.com/)
+  * user-friendly wrapper around `knitr` and `pandoc`
+
+* [`knitr`](https://yihui.org/knitr/)
+  * an `R` package that executes code chunks
+  * "knits" results back to document
+
+* [`pandoc`](https://pandoc.org/)
+  * a general purpose document converter
+  * command line tool, no GUI
+  * `brew install pandoc`
+
+???
+
+It's useful to understand which program is doing what in case you need to chase down errors. 
+
+---
+
+### Code chunk options
+
+Each code chunk gets a label.
+* avoid spaces, underscores, periods; hyphens are safe
+
+Each chunk has __options__. Options can be included by either:
+* comma separated list between 
+  * `{r, chunk-label, option1 = foo, option2 = bar }`
+* special demarcated comment
+  * `{r, chunk-label}`
+  * `#| option1 = foo,`
+  * `#| option2 = bar`
+* or as yaml
+  * `{r, chunk-label}`
+  * `#| option1: foo`
+  * `#| option2: bar`
+
+---
+
+### Code chunk options
+
+Common options for __controlling display__ of results.
+* For a full list see 
+[here](https://yihui.org/knitr/options/).
+
+| Option    | Action                                              |
+|:----------|:----------------------------------------------------|
+| `eval`    | Run the code included in the chunk?                 |
+| `echo`    | Show the code chunk in the rendered document?       |
+| `warning` | Print warning messages generated by code?           |
+| `error`   | Print and keep running after errors?                |
+| `message` | Print messages generated by code?                   |
+| `include` | Show the code and results in the rendered document? |
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Demonstrating code chunk options]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/04_example_report.Rmd" style="color:#ffffff" download&gt;Code: `04_example_report.Rmd`&lt;/a&gt;
+]
+
+???
+
+Demo: 
+* See `04_example_report.Rmd` for exact syntax
+* Add `echo` options to code chunks
+
+---
+
+### Tables
+
+There are several options for __making tables in R Markdown__.
+* just print a data.frame or matrix
+  * .green[\+] easy, .red[-] monospaced format
+* [`knitr::kable`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html)
+  * .green[\+] easy, nice looking, .red[-] not 100% flexible
+* [`gt`](https://gt.rstudio.com/)
+  * .green[\+] tidyverse compatible syntax, highly flexible, .red[-] only html for now
+* [`xtable::xtable`](https://www.rdocumentation.org/packages/xtable/versions/1.8-4/topics/xtable)
+  * .green[\+] highly customizable, .red[-] only for pdfs (LaTex based)
+* [`pander::pander`](https://cran.r-project.org/web/packages/pander/vignettes/knitr.html)
+  * .green[\+] default tables for different `R` classes
+* [`stargazer::stargazer`](https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf)
+
+???
+
+I find `kable` sufficient for 90\% of my report needs and `xtable` for creating tables for LaTex manuscripts. `gt` looks like it will soon become industry standard, as all things tidyverse tend to do. 
+
+Think about whether there is a need for really nicely formatted tables or whether raw output is OK. Who's the audience?
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Start of Rmd for HIV analysis]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/01_hiv_report.Rmd" style="color:#ffffff" download&gt;Code: `01_hiv_report.Rmd`&lt;/a&gt;
+]
+
+???
+
+Demo:
+* 01_hiv_report.Rmd
+* Add code chunks to read data, label data, and build a table 1
+
+---
+
+### Figures
+
+Figures produced by R code will be placed __after the code chunk__ from which they were generated. 
+
+See all [figure options here](https://yihui.org/knitr/options/#plots)
+* Most relevant options are `fig.cap`, and `fig.align`, `out.width`, `out.height`
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Add scatter plot to HIV analysis]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/02_hiv_report.Rmd" style="color:#ffffff" download&gt;Code: `02_hiv_report.Rmd`&lt;/a&gt;
+]
+
+???
+
+Demo:
+* 02_hiv_report.Rmd
+* Add code chunk to generate scatterplot
+* Change size and alignment using chunk options
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Add the main regression analysis]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/03_hiv_report.Rmd" style="color:#ffffff" download&gt;Code: `03_hiv_report.Rmd`&lt;/a&gt;
+]
+
+???
+
+Demo:
+* `03_hiv_report.Rmd`
+* Add section for regression analysis
+* Report fits from two models using `gtsummary`
+
+---
+
+### Code chunk options
+
+Change __options for all chunks__ using code chunk at the top of the `.Rmd`.
+
+````markdown
+```{r, setup, include = FALSE, message = FALSE, warning = FALSE}
+library(knitr)
+opts_chunk$set(
+  echo = FALSE, message = FALSE, warning = FALSE
+)
+```
+````
+
+Note that you still need to suppress the code chunk that includes the call to `opts_chunk$set()`.
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Setting global chunk options]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/04_hiv_report.Rmd" style="color:#ffffff" download&gt;Code: `04_hiv_report.Rmd`&lt;/a&gt;
+]
+
+???
+
+Demo:
+* `04_hiv_report.Rmd`
+* Add code chunk to suppress all code, messages, warnings.
+* Render and compare
+
+---
+
+### Code chunk options
+
+Suppose we would like to use the same Rmd code for two purposes:
+* __testing__: display code, messages for debugging purposes
+* __production__: suppress code, messages for sharing purposes
+
+Option values can be __any valid `R` expression__.
+* Define a `TRUE/FALSE` variable
+* If `TRUE`, hide chunks
+* If `FALSE`, display all code and messages
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Creating a production switch]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/05_hiv_report.Rmd" style="color:#ffffff" download&gt;Code: `05_hiv_report.Rmd`&lt;/a&gt;
+]
+
+???
+
+Demo:
+* `05_hiv_report.Rmd`
+* Add chunk to beginning defining a variable named `production`
+* Only evaluate the `opts_set` chunk if not in `production`
+
+---
+
+## Rendering from the command line
+
+We will be rendering documents from the __command line__.
+
+What does clicking "Knit" actually do?
+* runs a function called `render` from the `rmarkdown` package
+
+---
+
+## Rendering from the command line
+
+__Option 1__: 
+
+* Make `render_report.R` script in same directory as `hiv_report.Rmd` that contains the following:
+
+
+```r
+library(rmarkdown)
+render('hiv_report.Rmd')
+```
+
+* Use `Rscript` to run the code at the command line:
+
+
+```bash
+Rscript render_report.R
+```
+
+---
+
+## Rendering from the command line
+
+__Option 2__: 
+
+* From the directory that contains `hiv_report.Rmd`, run `Rscript` with `-e` option:
+
+
+```bash
+Rscript -e "library(rmarkdown); render('hiv_report.Rmd')"
+```
+
+See the [`render` documentation](https://rmarkdown.rstudio.com/docs/reference/render.html) for options. 
+
+???
+
+You could equivalently write this as:
+
+`Rscript -e "rmarkdown::render('hiv_report.Rmd')`
+
+The `::` syntax in the `R` command says, "in the `rmarkdown` package use the (exported, see R packages lecture) function `render`. 
+
+* Allows us to avoid the extra line of code to load the library
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Rendering from the command line]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/01_render_report.R" style="color:#ffffff" download&gt;Code: `01_render_report.R`&lt;/a&gt;
+]
+
+.large[
+and
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/05_hiv_report.Rmd" style="color:#ffffff" download&gt;Code: `05_hiv_report.Rmd`&lt;/a&gt;
+]
+
+???
+
+Demo:
+* `05_hiv_report.Rmd` + `01_render_report.R`
+* Show rendering via running R script and with `-e` option.
+
+---
+
+## Parameterized reports
+
+The code chunk defining the `production` variable in `R` is not ideal.
+* Manual point/click/type work required
+
+__Parametrized reports__ provide a programmatic way to change this option.
+
+In `yaml`, define `params` option to set defaults.
+* `params` object is available in `R` session to check parameter settings when document is rendered.
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Parameterizing the report]
+]
+
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/02_render_report.R" style="color:#ffffff" download&gt;Code: `02_render_report.R`&lt;/a&gt;
+]
+
+.large[
+and
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="hiv_project/tmp_reports/06_hiv_report.Rmd" style="color:#ffffff" download&gt;Code: `06_hiv_report.Rmd`&lt;/a&gt;
+]
+
+
+???
+
+Demo:
+* `06_hiv_report.Rmd` + `02_render_report.R`
+* Add `params` option to `yaml` with default to be not production.
+* Change code chunk to reference `params$production`
+* Add line to `02_render_report.R` to render with different parameters
+* Add second parameter `cutpoint`.
+* Change model formula for secondary model.
+* Add inline `R` expression to indicate cutpoint.
+* Add line to `02_render_report.R` to render with a different cutpoint.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "tomorrow-night-blue",
+"highlightLanguage": "rmarkdown",
+"highlightLines": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
