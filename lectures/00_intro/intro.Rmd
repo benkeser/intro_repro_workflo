@@ -68,7 +68,7 @@ Please feel free to ask __any question__ you like.
 
 * Understand why automation is a key element of reproducible data science.
 * Perform simple command line operations including running R scripts and compiling R markdown reports.
-* Use best coding practices and deliberate project organization to improve reproducibility of workflows.
+* Use best coding practices, deliberate project organization, and package management to improve reproducibility of workflows.
 * Use simple Makefiles to document dependencies in code and produce automated workflows.
 
 ---
@@ -100,27 +100,37 @@ A class...
 
 ???
 
-We will not discuss statistical methodology, though I may at 
-times show some basic statistics to illustrate software. 
+We will not discuss statistical methodology, though at times I'll show simple analyses to illustrate software. 
 
-Learning these tools requires practice and (often a great deal of) 
-frustration -- it's part of the process. Thankfully, there is a 
-large online community that you can access if you know how. Learning
-to google efficiently is surprisingly important. 
+Learning these tools requires practice and (often a great deal of) frustration -- it's part of the process. Thankfully, there is a large online community that you can access if you know how. Learning to google efficiently is surprisingly important. 
 
 ---
 
 ## Format of shortcourse
 
-The course will primarily be lectures and coding demonstrations.
+The course will consist of a mix of lecture and coding demonstrations.
 
-I recommend that during the live sessions, students:
-* focus on the __what__ and __why__;
-* less focus on the __how__;
+The coding demos will build towards a simple reproducible workflow together.
+* Motivating data set from HIV
+
+---
+
+## Format of shortcourse
+
+Short courses are difficult to teach. Virtual ones, even more so.
+
+Suggested approach:
+
+1\. Learning objectives for today
+
+* focus on the __what__ and __why__, less on the __how__;
 * do not (neccessarily) try to follow along with live coding demos.
 
-__Recordings will be made available after the course__.
-* revisit recordings or source code for specific syntax
+2\. Learning objectives: redux
+
+* __Recordings will be made available after the course__.
+* revisit recordings at your own pace and code along
+* more advanced coders: try to modify a project of your own along the same lines
 
 ---
 
@@ -148,4 +158,22 @@ The slides contain additional "presenter" notes.
 ## Schedule
 
 __Day 1__
-* Motivation
+* 9:00-9:45: Motivation + text editors and IDEs
+* 9:45-10:15: The command line (~30 minutes)
+* .red[10:15-10:30: Break]
+* 10:30-11:15: R Markdown
+* .red[11:15-11:30: Break]
+* 11:30-12:30: R Markdown
+
+---
+
+## Schedule
+
+__Day 2__
+* 9:00-9:45: Project organization
+* 9:45-10:15: GNU Make
+* .red[10:15-10:30: Break]
+* 10:30-11:00: GNU Make
+* 11:00-11:15: Additional topics
+* .red[11:15-11:30: Break]
+* 11:30-12:30: Additional topics

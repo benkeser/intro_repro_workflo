@@ -67,6 +67,17 @@ style_mono_accent(
 }
 </style>
 
+## Learning objectives
+
+1. Describe the basic logic of target updating in make.
+2. Define a `PHONY` rule
+
+## Learning objectives: redux
+
+1. Create basic `Makefiles` that document dependencies between targets.
+2. Use `make` to render an entire project from start (i.e., a clean working directory) to finish.
+3. Discuss potential uses of more advanced make features.
+
 ### Why GNU Make?
 
 GNU Make is a program often used for compiling software. 
