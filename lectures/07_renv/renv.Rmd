@@ -17,7 +17,6 @@ output:
       highlightLines: false
 ---
 
-
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 library(xaringanthemer)
 
@@ -53,7 +52,19 @@ style_mono_accent(
 )
 ```
 
-### Reproducibility redux
+## Learning objectives
+
+1. Identify the benefits and limitations of package management systems in `R`.
+2. Describe the basic workflow of using `renv`.
+
+## Learning objectives
+
+1. Describe the role of the `renv.lock` file.
+2. Describe the role of `renv/activate.R`.
+3. Initialize, restore, and take snapshots of a project library.
+4. Use `.libPaths()` to identify library locations during `R` run time.
+
+### Reproducibility: redux
 
 Thus far, we have mainly focused on making project reproducible on a limited basis.
 * Single system, single `R` installation

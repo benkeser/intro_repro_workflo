@@ -31,6 +31,13 @@ class: left, middle, inverse, title-slide
 }
 &lt;/style&gt;
 
+## Learning objectives
+
+1. Define reproducibility as used in the context of this course. 
+2. Describe varying levels of reproducibility and identify settings where different levels may be appropriate.
+
+---
+
 ## An email you'll receive
 
 .center[
@@ -52,14 +59,9 @@ class: left, middle, inverse, title-slide
 
 ???
 
-Very commonly in collaborations, the data change. It could be 
-due to errors, more data being added, etc... The goal of this class 
-is to make it so you do not fill with dread when you receive such an 
-e-mail.
+Very commonly in collaborations, the data change. It could be due to errors, more data being added, etc... The goal of this class is to make it so you do not fill with dread when you receive such an e-mail.
 
-We are working toward a world where you download the new data,
-type one command and voila! No by-hand entering numbers into tables. 
-No copy-pasting from R/SAS/STATA to Word. Just one click.
+We are working toward a world where you download the new data, type one command and voila! No by-hand entering numbers into tables. No copy-pasting from R/SAS/STATA to Word. Just one click.
 
 ---
 
@@ -83,13 +85,7 @@ No copy-pasting from R/SAS/STATA to Word. Just one click.
 ???
 
 
-To prepare for situations like this, project organization is key. 
-We will discuss strategies for 
-preparing fast-turnaround projects. But just because we are turning
-projects around quickly, does not mean we are not working carefully. 
-By having a set, reproducible workflow in place before data acquisition, 
-we can have the best of both worlds. Careful analysis planning and 
-execution AND fast delivery.
+To prepare for situations like this, project organization is key. We will discuss strategies for preparing fast-turnaround projects. But just because we are turning projects around quickly, does not mean we are not working carefully. By having a set, reproducible workflow in place before data acquisition, we can have the best of both worlds. Careful analysis planning and execution AND fast delivery.
 
 ---
 
@@ -112,9 +108,7 @@ execution AND fast delivery.
 
 ???
 
-Collaborative projects with multiple people developing and running
-code can be challenging to manage. We'll discuss the tools that make 
-this easier to achieve. 
+Collaborative projects with multiple people developing and running code can be challenging to manage. We'll discuss the tools that make this easier to achieve. 
 
 ---
 
@@ -137,11 +131,7 @@ this easier to achieve.
 
 ???
 
-Software version control is another big challenge, particularly as 
-more modern learning techniques (e.g., machine learning) are applied. 
-Small changes in an algorithm, in how random seeds are set, etc... can 
-lead to possibly large changes in down-stream analyses. We'll discuss
-containerization tools that make all of these problems tractable. 
+Software version control is another big challenge, particularly as more modern learning techniques (e.g., machine learning) are applied. Small changes in an algorithm, in how random seeds are set, etc... can lead to possibly large changes in down-stream analyses. We'll discuss containerization tools that make all of these problems tractable. 
 
 ---
 
@@ -157,25 +147,15 @@ containerization tools that make all of these problems tractable.
 
 ???
 
-There are many definitions of reproducibility/replicability/etc... See
-the [class readings](https://benkeser.github.io/intro_repro_workflo/readings#reproducible-research) for more. 
+There are many definitions of reproducibility/replicability/etc... See the [class readings](https://benkeser.github.io/intro_repro_workflo/readings#reproducible-research) for more. 
 
-We will focus on building analyses that satisfy the reproducibility 
-definition outlined above. Could a different analyst sit down with your code, 
-execute it and get exactly the same results?
+We will focus on building analyses that satisfy the reproducibility definition outlined above. Could a different analyst sit down with your code, execute it and get exactly the same results?
 
-Reproducibility is a *minimal* standard. Just because something is 
-*reproducible* does not necessarily imply that it is *correct*. The 
-code may have bugs. The methods may be poorly behaved. But reproducibility 
-is likely correlated with correctness -- if you are careful enough to 
-make everything reproducible, you're probably more likely to be careful
-in designing the analysis in the first place. 
+Reproducibility is a *minimal* standard. Just because something is *reproducible* does not necessarily imply that it is *correct*. The code may have bugs. The methods may be poorly behaved. But reproducibility is likely correlated with correctness -- if you are careful enough to make everything reproducible, you're probably more likely to be careful in designing the analysis in the first place. 
 
-We will use replicability to mean a new experiment using the same methods
-coming to the same conclusions. 
+We will use replicability to mean a new experiment using the same methods coming to the same conclusions. 
 
-Generalizability refers to taking conclusions from your study population
-and generalizing them to a new population. 
+Generalizability refers to taking conclusions from your study population and generalizing them to a new population. 
 
 ---
 class: title-slide, center, inverse, middle
@@ -196,14 +176,9 @@ background-color: #84754e
 ???
 
 Doing reproducible science is time consuming, but is ultimately time-saving.
-As you practice these tools more and more, they will start to become
-habits. I do analyses now in a day or so (and at much higher quality) now
-that would take me a (frustrating) week seven or eight years ago. 
+As you practice these tools more and more, they will start to become habits. I do analyses now in a day or so (and at much higher quality) now that would take me a (frustrating) week seven or eight years ago. 
 
-One of my great fears as an academic is being accused of intentionally 
-doing bad science. Leaving a paper trail that any one else can follow is
-a bit intimidating -- we all make mistakes. Reproducible work indicates 
-that any mistakes made were likely honest.
+One of my great fears as an academic is being accused of intentionally doing bad science. Leaving a paper trail that any one else can follow is a bit intimidating -- we all make mistakes. Reproducible work indicates that any mistakes made were likely honest.
 
 ---
 class: title-slide, center, inverse, middle
@@ -227,10 +202,7 @@ background-color: #012169
 
 ???
 
-Reproducibility is not black and white. The ideal is not easy to 
-achieve, nor is it necessarily warranted on every project. This is a lifelong
-process of understanding what level of reproducibility is required for 
-each project. 
+Reproducibility is not black and white. The ideal is not easy to achieve, nor is it necessarily warranted on every project. This is a lifelong process of understanding what level of reproducibility is required for each project. 
 
 
 ## Basic principles
@@ -245,14 +217,9 @@ each project.
 
 ???
 
-The goal is end-to-end reproducibility. In many situations, 
-*you* will be the person with the most data 
-management experience. Reproducibility can easily be undermined
-by e.g., a collaborator who is manually extracting data from an 
-online data base and copy-pasting it into a .csv for you. 
+The goal is end-to-end reproducibility. In many situations, *you* will be the person with the most data management experience. Reproducibility can easily be undermined by e.g., a collaborator who is manually extracting data from an online data base and copy-pasting it into a .csv for you. 
 
-Solution: Code the download process! Automate data pulls! Document
-how you're doing it!
+Solution: Code the download process! Automate data pulls! Document how you're doing it!
 
 ---
 
@@ -267,9 +234,7 @@ how you're doing it!
 
 ???
 
-All of these actions are problematic. Each introduces the possibility
-of inconsistencies or errors and is not reproducible in the sense 
-that we mean. 
+All of these actions are problematic. Each introduces the possibility of inconsistencies or errors and is not reproducible in the sense that we mean. 
 
 ---
 class: title-slide, center, inverse, middle
@@ -291,6 +256,7 @@ __Covered in this course__
 * `bash`, `R`
 * RMarkdown, Latex, Knitr
 * GNU Make
+* package management
 
 __Other tools__
 * git and online repositories (e.g., GitHub)
@@ -300,31 +266,13 @@ __Other tools__
 
 ???
 
-In this class, we'll be learning to operate almost on 
-the command line. Soon, [this will be you](https://tenor.com/8IZG.gif). 
+In this class, we'll be learning to operate almost on the command line. Soon, [this will be you](https://tenor.com/8IZG.gif). 
 
-Knowing some `bash` is necessary to operate at the command line and 
-generally useful for scripting. `R` is becoming (or already is) a standard 
-software for analysis.
+Knowing some `bash` is necessary to operate at the command line and generally useful for scripting. `R` is becoming (or already is) a standard software for analysis.
 
-RMarkdown + knitr are great tools for generating reproducible reports (or
-course notes...). 
+RMarkdown + knitr are great tools for generating reproducible reports (or course notes...). 
 
-GNU Make is for automation and for documenting dependencies between 
-files. 
-
-Git will make your life easier by handling version control. No more
-directories with 200 copies of the same file with different dates!
-
-`R` packages are a useful way to wrap up code, documentation, and dependencies
-on other `R` packages. 
-
-Containers make it possible to achieve full reproducibility rather 
-painlessly, by wrapping all needed software (down to the OS!) up into a 
-"container". 
-
-`python` is also becoming quite popular for analysis, 
-but goes much beyond. Other languages are great, but not totally necessary.
+GNU Make is for automation and for documenting dependencies between files. 
 
 ---
 class: title-slide, center, inverse, middle

@@ -52,6 +52,12 @@ style_mono_accent(
 }
 </style>
 
+## Learning objectives
+
+1. Describe how IDEs support the reproducible research endeavor.
+
+---
+
 ## Important principle 
 
 .center[
@@ -64,11 +70,7 @@ style_mono_accent(
 
 Pointing-and-clicking is not reproducible! 
 
-Moreover, every time you have to reach for the mouse, there's a 
-loss of efficiency. Saving 1 second on something you do 50 times a
-day means saving about five hours per year. You're going to be writing
-code the rest of your career. Ten years from now, do you want to look
-back and realize you spent two days of time reaching to and from your mouse?
+Moreover, every time you have to reach for the mouse, there's a loss of efficiency. Saving 1 second on something you do 50 times a day means saving about five hours per year. You're going to be writing code the rest of your career. Ten years from now, do you want to look back and realize you spent two days of time reaching to and from your mouse?
 
 ---
 
@@ -94,6 +96,18 @@ such that the difference between editors is becoming smaller.
 
 ---
 
+background-color: #007dba
+class: title-slide, center, inverse, middle
+
+*Direction of causality: long-time coders don’t [write reproducible code] because they use an IDE. They use an IDE because it makes it easier to [do so].*
+<div> [Jenny Bryan](https://jennybryan.org/)
+
+???
+
+Paraphrasing what is written [here](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/).
+
+---
+
 ## Good editors/IDEs
 
 * [R Studio](https://www.rstudio.com/products/rstudio/download/)
@@ -112,3 +126,25 @@ I will use __R Studio__ for this course, because I suspect it is the most famili
 ???
 
 See [course readings](https://benkeser.github.io/intro_repro_workflo/readings#text-editors) for more resources. 
+
+---
+
+## R Studio IDE
+
+All users should:
+* [install `pandoc`](https://pandoc.org/installing.html) and confirm it is on your `PATH`
+* [install R Studio](https://www.rstudio.com/products/rstudio/download/)
+
+Windows users should additionally:
+* install [git](https://git-scm.com/download/win)
+* confirm that `git bash` is the default R Studio terminal
+* [add folder](https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/) where `R.exe` and `Rscript.exe` are installed to your `PATH`
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+`r fontawesome::fa("desktop", fill = "#ffffff")` .white[Brief introduction to the R Studio IDE]
+]

@@ -67,6 +67,25 @@ style_mono_accent(
 }
 </style>
 
+## Learning objectives
+
+1. Identify settings where reproducible reports may be beneficial.
+2. Describe the role of the three primary components of an R Markdown document: yaml, markdown, and R chunks.
+3. Render pre-written R Markdown documents using R Studio's knit button.
+4. Describe what code chunk options accomplish and identify use cases in reproducible reports.
+5. Explain how parametrized reports work and how to access parameters within `R` code.
+
+---
+
+## Learning objectives: redux
+
+1. Write basic yaml headers with suboptions and/or in-line `R` code.
+2. Develop a complete R Markdown document.
+3. Render R Markdown documents from the command line.
+4. Construct parameterized reports and identify approaches to modify parameter defaults and control parameter values at the time of rendering.
+
+---
+
 ### Background: HIV
 
 ```{r, fig.align  = 'center', out.width = "600px", echo = FALSE}

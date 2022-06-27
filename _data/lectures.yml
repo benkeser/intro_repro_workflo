@@ -30,9 +30,9 @@
   filename: commandline
   reading: command-line
   recording: ''
-  recording_url: unix-command-line
+  recording_url: the-command-line
   start: 0:0:0
-  title: Unix command line
+  title: The command line
   tldr: The command line looks scary, but it is in fact your friend.
 - breakoutsoln: ''
   dirname: 04_rmarkdown
