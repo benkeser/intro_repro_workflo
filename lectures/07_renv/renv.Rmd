@@ -51,6 +51,11 @@ style_mono_accent(
   extra_css = extra_css
 )
 ```
+<style type="text/css">
+.remark-slide-content {
+    font-size: 22px
+}
+</style>
 
 ## Learning objectives
 
@@ -59,7 +64,7 @@ style_mono_accent(
 
 ---
 
-## Learning objectives
+## Learning objectives: redux
 
 1. Describe the role of the `renv.lock` file.
 2. Describe the role of `renv/activate.R`.

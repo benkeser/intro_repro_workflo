@@ -179,7 +179,7 @@ background-color: #487f84
 ]
 
 .large[
-`r fontawesome::fa("code", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code</a>
+`r fontawesome::fa("code", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code: `finding_files.zip`</a>
 ]
 
 ---
@@ -212,7 +212,7 @@ background-color: #487f84
 ]
 
 .large[
-`r fontawesome::fa("desktop", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code</a>
+`r fontawesome::fa("code", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code: `finding_files.zip`</a>
 ]
 
 ---
@@ -238,7 +238,7 @@ background-color: #487f84
 ]
 
 .large[
-`r fontawesome::fa("desktop", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code</a>
+`r fontawesome::fa("code", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code: `finding_files.zip`</a>
 ]
 
 ???
@@ -286,7 +286,7 @@ background-color: #487f84
 ]
 
 .large[
-`r fontawesome::fa("desktop", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code</a>
+`r fontawesome::fa("code", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code: `finding_files.zip`</a>
 ]
 
 ???
@@ -429,7 +429,7 @@ background-color: #487f84
 ]
 
 .large[
-`r fontawesome::fa("desktop", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code</a>
+`r fontawesome::fa("code", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code: `finding_files.zip`</a>
 ]
 
 ???
@@ -478,7 +478,7 @@ background-color: #487f84
 ]
 
 .large[
-`r fontawesome::fa("desktop", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code</a>
+`r fontawesome::fa("code", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code: `finding_files.zip`</a>
 ]
 
 ???

@@ -201,12 +201,12 @@ Demo:
 Rules do not always have to create files.
 * Example: `make clean` to remove old output files
 
-Another example: we could use `make descriptive_analysis` to run both `01_table1.R` and `02_scatter.R`
+Example: `make descriptive_analysis` runs both `01_table1.R` and `02_scatter.R`
 * .red[Less clear documentation]
 * .green[Easier to remember?]
 
-The bash symbols `&amp;&amp;` and `\` can be helpful to split commands over multiple lines.
-* `&amp;&amp;` = only execute next command if last command runs error-free
+The symbols `&amp;&amp;` and `\` helpful for splitting commands over multiple lines.
+* `&amp;&amp;` = only execute next command if last ran error-free
   * needed if specific order is required for multiple actions
 * `\` = escape character to ignore a new line
 
