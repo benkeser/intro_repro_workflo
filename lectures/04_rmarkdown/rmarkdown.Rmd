@@ -134,13 +134,13 @@ Sugars are really "potential N-linked glycosylation sites".
 ### Motivation: reproducibility
 
 The goal is to generate a report that:
-* includes basic descriptive information about the data set
+* includes basic __descriptive information__ about the data set
 * includes analysis of `ab_resistance ~ shield_glycans`
 
-Reasons to consider reproducibility:
-* publication may require code/data submission
-* may need to update reports if more data are reported in CATNAP
-* may need to use similar analysis for different antibodies
+Reasons to consider __reproducibility__ from the outset:
+* publication may require __code/data submission__
+* may need to __update reports__ if more data are reported in CATNAP
+* may need to use __similar analysis__ for different antibodies
 * ...
 
 ---
@@ -176,9 +176,9 @@ R Markdown documents consist of three components:
 
 1\. `yaml` header
 * specifies meta options for the document
-* E.g., title, authors, output format, etc...
+* Title, authors, output format, etc...
 
-2\. Plain text written in markdown
+2\. Plain text written in __markdown__
 * plain writing + section headers + tables + ...
 
 3\. `R` code
@@ -194,7 +194,7 @@ Throughout this lecture, we will gradually build up several __R Markdown documen
 On each code demonstration slide, code is linked.
 * (roughly) what the R Markdown document should look like *at the end* of the demonstration.
 
-All of these reports can be [browsed on GitHub](https://github.com/benkeser/intro_repro_workflo/lectures/04_rmarkdown/hiv_report/tmp_reports).
+All of these reports can be [browsed on GitHub](https://github.com/benkeser/intro_repro_workflo/tree/main/lectures/04_rmarkdown/hiv_project/tmp_reports).
 
 ---
 
