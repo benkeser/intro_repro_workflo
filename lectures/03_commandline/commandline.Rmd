@@ -215,6 +215,16 @@ background-color: #487f84
 `r fontawesome::fa("code", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code: `finding_files.zip`</a>
 ]
 
+???
+
+Demo:
+* `mkdir` for R and python code
+* `mv` files into those directories
+* `cp` files from those directories back to code directory
+* `rm` files in R and python code directories
+* `rm` folders
+* `touch` a new file in the code directory
+
 ---
 
 ## Previewing contents of files
@@ -390,7 +400,7 @@ background-color: #487f84
 ]
 
 .large[
-`r fontawesome::fa("desktop", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code</a>
+`r fontawesome::fa("code", fill = "#ffffff")` <a href="finding_files.zip" style="color:#ffffff" download>Code: finding_files.zip</a>
 ]
 
 ???

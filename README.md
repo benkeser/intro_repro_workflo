@@ -1,16 +1,8 @@
-# INFO 550
+# Introduction to Reproducible Workflows in R
 
-GitHub repository for INFO550 at Emory University Rollins School of Public Health.
+This is a GitHub repository for hosting course materials and website 
+for the "Introduction to Reproducible Workflows in R" short course that
+I offer.
 
-<!--
-# Notes to self
-
-* if a lecture of homework requires a new package, it needs to be
-added to DESCRIPTION
-* the yaml of lectures should contain
-	* reading, tldr, title, and recording
-* the yaml of homeworks should contain
-	* due and title 
-* change the name of baseurl in _config to repo name
-* change repo name in `_build` and `_deploy`
--->
+The website can be viewed [here](https://benkeser.github.io/intro_repro_workflo).
+The source code for the website is hosted on the [`gh-pages`](https://github.com/benkeser/intro_repro_workflo/tree/gh-pages) branch.
