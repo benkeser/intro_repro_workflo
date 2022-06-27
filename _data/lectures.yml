@@ -1,0 +1,83 @@
+- breakoutsoln: ''
+  dirname: 00_intro
+  filename: intro
+  reading: ''
+  recording: 91596f73-024b-4e58-93ae-ad90011887f7
+  recording_url: front-matter
+  start: 0:0:0
+  title: Front Matter
+  tldr: Nuts and bolts of the course.
+- breakoutsoln: ''
+  dirname: 01_motivation
+  filename: motivation
+  reading: reproducible-research
+  recording: ''
+  recording_url: motivation
+  start: 0:0:0
+  title: Motivation
+  tldr: Reproducibility is good for science, but more importantly, it lets us be lazy.
+- breakoutsoln: ''
+  dirname: 02_texteditor
+  filename: texteditor
+  reading: text-editors
+  recording: ''
+  recording_url: text-editors-and-ides
+  start: 0:0:0
+  title: Text editors and IDEs
+  tldr: Give me a good text editor, or give me death.
+- breakoutsoln: ''
+  dirname: 03_commandline
+  filename: commandline
+  reading: command-line
+  recording: ''
+  recording_url: unix-command-line
+  start: 0:0:0
+  title: Unix command line
+  tldr: The command line looks scary, but it is in fact your friend.
+- breakoutsoln: ''
+  dirname: 04_rmarkdown
+  filename: rmarkdown
+  reading: r-markdown
+  recording: ''
+  recording_url: r-markdown-for-reproducible-reports
+  start: 0:0:0
+  title: R Markdown for reproducible reports
+  tldr: Reproducible reports are as easy as learning the syntax for 3 or 4, or maybe
+    5 different markup languages!
+- breakoutsoln: ''
+  dirname: 05_organization
+  filename: organization
+  reading: project-organization
+  recording: ''
+  recording_url: project-organization
+  start: 0:0:0
+  title: Project organization
+  tldr: Choose an organization structure that sparks joy.
+- breakoutsoln: ''
+  dirname: 06_make
+  filename: make
+  reading: gnu-makefiles
+  recording: ''
+  recording_url: gnu-make
+  start: ''
+  title: GNU Make
+  tldr: You'll never again think to yourself, 'Where the heck did this plot come from?'
+- breakoutsoln: ''
+  dirname: 07_renv
+  filename: renv
+  reading: package-management
+  recording: ''
+  recording_url: package-management
+  start: ''
+  title: Package management
+  tldr: renv holds the title of 'least-bad' package management system for R.
+- breakoutsoln: ''
+  dirname: 08_codestyle
+  filename: codestyle
+  reading: coding-style
+  recording: ''
+  recording_url: coding-in-style
+  start: 0:0:0
+  title: Coding in style
+  tldr: Write your code for humans to read. No one else will read it, but you might,
+    later.
