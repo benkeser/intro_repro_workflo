@@ -72,11 +72,15 @@ style_mono_accent(
 1. Describe the basic logic of target updating in make.
 2. Define a `PHONY` rule
 
+---
+
 ## Learning objectives: redux
 
 1. Create basic `Makefiles` that document dependencies between targets.
 2. Use `make` to render an entire project from start (i.e., a clean working directory) to finish.
 3. Discuss potential uses of more advanced make features.
+
+---
 
 ### Why GNU Make?
 
@@ -283,12 +287,17 @@ Demo:
 ---
 
 ### More on make
+
 You can get very fancy with `make`.
 * Automatic variable names
   * E.g., use `$<` in place of first dependency
 * Pattern matching
   * E.g., `%` is a wildcard for targets and `$*` references the matched part of the target
 * [Functions](https://swcarpentry.github.io/make-novice/07-functions/index.html), [variables](https://swcarpentry.github.io/make-novice/06-variables/index.html), ...
+
+---
+
+### More on make
 
 Other miscellaneous notes:
 * Name your `Makefile` e.g., `something_else`

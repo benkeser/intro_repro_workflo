@@ -97,6 +97,10 @@ __Major suggestions__
 * .red[No absolute filepaths in code.]
 * Modularize code.
 
+---
+
+### Basic principles
+
 __Other suggestions__
 * `Makefile`'s and/or READMEs to document dependencies.
 * No spaces in file names. 
