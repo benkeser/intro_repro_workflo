@@ -17,6 +17,42 @@ output:
       highlightLines: false
 ---
 
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+
+extra_css <- list(
+  ".clearbox" = list(
+    display = "inline-block", 
+    width = "100%",
+    padding = "5px",
+    border = "1px solid #012169",
+    `background-color` = "#d9d9d6",
+    `align-items` = "left",
+    `vertical-align` = "middle"
+  ),
+  ".small" =  list(`font-size` = "80%"),
+  ".large" =  list(`font-size` = "150%"),
+  "ul li" = list(`margin-bottom` = "10px"),
+  ".red" = list(color = "#da291c",
+                `font-weight` = "600"),
+  ".green" = list(color = "#348338",
+                `font-weight` = "600"),
+  ".remark-code-line-highlighted" = list(border = "2px solid #f2a900",
+                                         `background-color` = "#002451"),
+  "a" = list(color = "#007dba"),
+  "a:hover" = list("text-decoration" = "underline")
+)
+
+style_mono_accent(
+  base_color = "#012169",
+  header_font_google = google_font("DM Sans"),
+  text_font_google   = google_font("DM Sans", "400", "400i"),
+  code_font_google   = google_font("Courier Prime"),
+  extra_css = extra_css
+)
+```
+
 ### Reproducibility redux
 
 Thus far, we have mainly focused on making project reproducible on a limited basis.
