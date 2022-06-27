@@ -209,6 +209,14 @@ background-color: #487f84
 `r fontawesome::fa("code", fill = "#ffffff")` <a href="https://raw.githubusercontent.com/benkeser/intro_repro_workflo/main/lectures/04_rmarkdown/hiv_project/tmp_reports/01_example_report.Rmd" style="color:#ffffff">Code: `01_example_report.Rmd`</a>
 ]
 
+.large[
+and
+]
+
+.large[
+`r fontawesome::fa("folder", fill = "#ffffff")` <a href="hiv_project/data/vrc01_data.csv" style="color:#ffffff">Data: `vrc01_data.csv`</a>
+]
+
 ???
 
 Demo: 
@@ -241,6 +249,14 @@ background-color: #487f84
 
 .large[
 `r fontawesome::fa("code", fill = "#ffffff")` <a href="https://raw.githubusercontent.com/benkeser/intro_repro_workflo/main/lectures/04_rmarkdown/hiv_project/tmp_reports/01_example_report.Rmd" style="color:#ffffff">Code: `01_example_report.Rmd`</a>
+]
+
+.large[
+and
+]
+
+.large[
+`r fontawesome::fa("folder", fill = "#ffffff")` <a href="hiv_project/data/vrc01_data.csv" style="color:#ffffff">Data: `vrc01_data.csv`</a>
 ]
 
 ???
@@ -301,6 +317,14 @@ background-color: #487f84
 `r fontawesome::fa("code", fill = "#ffffff")` <a href="https://raw.githubusercontent.com/benkeser/intro_repro_workflo/main/lectures/04_rmarkdown/hiv_project/tmp_reports/02_example_report.Rmd" style="color:#ffffff">Code: `02_example_report.Rmd`</a>
 ]
 
+.large[
+and
+]
+
+.large[
+`r fontawesome::fa("folder", fill = "#ffffff")` <a href="hiv_project/data/vrc01_data.csv" style="color:#ffffff">Data: `vrc01_data.csv`</a>
+]
+
 ???
 
 Demo: 
@@ -328,6 +352,14 @@ background-color: #487f84
 
 .large[
 `r fontawesome::fa("code", fill = "#ffffff")` <a href="https://raw.githubusercontent.com/benkeser/intro_repro_workflo/main/lectures/04_rmarkdown/hiv_project/tmp_reports/03_example_report.Rmd" style="color:#ffffff">Code: `03_example_report.Rmd`</a>
+]
+
+.large[
+and
+]
+
+.large[
+`r fontawesome::fa("folder", fill = "#ffffff")` <a href="hiv_project/data/vrc01_data.csv" style="color:#ffffff">Data: `vrc01_data.csv`</a>
 ]
 
 ???
@@ -406,6 +438,14 @@ background-color: #487f84
 `r fontawesome::fa("code", fill = "#ffffff")` <a href="https://raw.githubusercontent.com/benkeser/intro_repro_workflo/main/lectures/04_rmarkdown/hiv_project/tmp_reports/04_example_report.Rmd" style="color:#ffffff">Code: `04_example_report.Rmd`</a>
 ]
 
+.large[
+and
+]
+
+.large[
+`r fontawesome::fa("folder", fill = "#ffffff")` <a href="hiv_project/data/vrc01_data.csv" style="color:#ffffff">Data: `vrc01_data.csv`</a>
+]
+
 ???
 
 Demo: 
@@ -448,6 +488,14 @@ background-color: #487f84
 `r fontawesome::fa("code", fill = "#ffffff")` <a href="https://raw.githubusercontent.com/benkeser/intro_repro_workflo/main/lectures/04_rmarkdown/hiv_project/tmp_reports/01_hiv_report.Rmd" style="color:#ffffff">Code: `01_hiv_report.Rmd`</a>
 ]
 
+.large[
+and
+]
+
+.large[
+`r fontawesome::fa("folder", fill = "#ffffff")` <a href="hiv_project/data/vrc01_data.csv" style="color:#ffffff">Data: `vrc01_data.csv`</a>
+]
+
 ???
 
 Demo:
@@ -476,6 +524,14 @@ background-color: #487f84
 `r fontawesome::fa("code", fill = "#ffffff")` <a href="https://raw.githubusercontent.com/benkeser/intro_repro_workflo/main/lectures/04_rmarkdown/hiv_project/tmp_reports/02_hiv_report.Rmd" style="color:#ffffff">Code: `02_hiv_report.Rmd`</a>
 ]
 
+.large[
+and
+]
+
+.large[
+`r fontawesome::fa("folder", fill = "#ffffff")` <a href="hiv_project/data/vrc01_data.csv" style="color:#ffffff">Data: `vrc01_data.csv`</a>
+]
+
 ???
 
 Demo:
@@ -494,6 +550,14 @@ background-color: #487f84
 
 .large[
 `r fontawesome::fa("code", fill = "#ffffff")` <a href="https://raw.githubusercontent.com/benkeser/intro_repro_workflo/main/lectures/04_rmarkdown/hiv_project/tmp_reports/03_hiv_report.Rmd" style="color:#ffffff">Code: `03_hiv_report.Rmd`</a>
+]
+
+.large[
+and
+]
+
+.large[
+`r fontawesome::fa("folder", fill = "#ffffff")` <a href="hiv_project/data/vrc01_data.csv" style="color:#ffffff">Data: `vrc01_data.csv`</a>
 ]
 
 ???
@@ -533,6 +597,14 @@ background-color: #487f84
 `r fontawesome::fa("code", fill = "#ffffff")` <a href="https://raw.githubusercontent.com/benkeser/intro_repro_workflo/main/lectures/04_rmarkdown/hiv_project/tmp_reports/04_hiv_report.Rmd" style="color:#ffffff">Code: `04_hiv_report.Rmd`</a>
 ]
 
+.large[
+and
+]
+
+.large[
+`r fontawesome::fa("folder", fill = "#ffffff")` <a href="hiv_project/data/vrc01_data.csv" style="color:#ffffff">Data: `vrc01_data.csv`</a>
+]
+
 ???
 
 Demo:
@@ -564,6 +636,14 @@ background-color: #487f84
 
 .large[
 `r fontawesome::fa("code", fill = "#ffffff")` <a href="https://raw.githubusercontent.com/benkeser/intro_repro_workflo/main/lectures/04_rmarkdown/hiv_project/tmp_reports/05_hiv_report.Rmd" style="color:#ffffff">Code: `05_hiv_report.Rmd`</a>
+]
+
+.large[
+and
+]
+
+.large[
+`r fontawesome::fa("folder", fill = "#ffffff")` <a href="hiv_project/data/vrc01_data.csv" style="color:#ffffff">Data: `vrc01_data.csv`</a>
 ]
 
 ???
@@ -643,7 +723,23 @@ and
 ]
 
 .large[
+`r fontawesome::fa("folder", fill = "#ffffff")` <a href="hiv_project/data/vrc01_data.csv" style="color:#ffffff">Data: `vrc01_data.csv`</a>
+]
+
+.large[
+and
+]
+
+.large[
 `r fontawesome::fa("code", fill = "#ffffff")` <a href="https://raw.githubusercontent.com/benkeser/intro_repro_workflo/main/lectures/04_rmarkdown/hiv_project/tmp_reports/05_hiv_report.Rmd" style="color:#ffffff">Code: `05_hiv_report.Rmd`</a>
+]
+
+.large[
+and
+]
+
+.large[
+`r fontawesome::fa("folder", fill = "#ffffff")` <a href="hiv_project/data/vrc01_data.csv" style="color:#ffffff">Data: `vrc01_data.csv`</a>
 ]
 
 ???
