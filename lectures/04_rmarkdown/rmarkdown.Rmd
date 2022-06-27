@@ -7,7 +7,6 @@ recording: ""
 breakoutsoln: ""
 start: "0:0:0"
 reading: "r-markdown"
-breakoutsoln: "example.Rmd"
 output:
   xaringan::moon_reader:
     css: xaringan-themer.css
