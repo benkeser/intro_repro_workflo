@@ -1,0 +1,23 @@
+library(here)
+i_am("code/00_clean_data.R")
+
+# see which directories are in use
+print(.libPaths())
+
+full_file_path <- here("raw_data", "vrc01_data.csv")
+data <- read.csv(full_file_path, header = TRUE)
+
+# label variables
+labelled::var_label(data) <- list(
+  id = "ID",
+  ab_resistance = "Antibody resistance score",
+  shield_glycans = "Shield glycans",
+  region = "Geographic Region",
+  env_length = "Length of Env protein"
+)
+
+data$number_glycans <- ifelse(data$shield_glycans < 4, "< 4", ">= 4")
+
+saveRDS(
+  data, file = here("output", "data_clean.rds")
+)

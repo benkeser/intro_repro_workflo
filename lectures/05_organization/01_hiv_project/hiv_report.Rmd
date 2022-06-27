@@ -1,0 +1,100 @@
+---
+title: VRC01 neutralization report
+author: David Benkeser
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+output: html_document
+params:
+  production: FALSE
+  cutpoint: 1
+---
+
+```{r, chunk-opts, include = FALSE, message = FALSE, warning = FALSE, eval = params$production}
+library(knitr)
+opts_chunk$set(
+  echo = FALSE, warning = FALSE, message = FALSE
+)
+```
+
+```{r, load-data, echo = FALSE}
+library(here)
+i_am("hiv_report.Rmd")
+full_file_path <- here("data", "vrc01_data.csv")
+data <- read.csv(full_file_path, header = TRUE)
+```
+
+# Descriptive Analysis
+
+## Tabular analysis
+
+Characteristics of the `r nrow(data)` viruses from the CATNAP database are displayed in the table below.
+
+```{r, table1}
+# labelled + gtsummary package for making pretty html tables
+library(labelled)
+library(gtsummary)
+
+# label variables
+var_label(data) <- list(
+  id = "ID",
+  ab_resistance = "Antibody resistance",
+  shield_glycans = "Shield glycans",
+  region = "Region",
+  env_length = "Length of Env protein"
+)
+
+data$number_glycans <- ifelse(data$shield_glycans < 4, "< 4", ">= 4")
+
+# make the table
+data |> 
+  select("region", "env_length", "ab_resistance", "number_glycans") |>
+  tbl_summary(by = number_glycans) |> 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**PNGs in Glycan Shield**") |>
+  add_overall() |>
+  add_p()
+```
+
+
+## Graphical analysis
+
+Below we report a scatter plot of resistance as a function of PNGs in the glycan shield.
+
+```{r, plot-data}
+#| fig.cap = "Scatter plot with linear model smoother",
+#| fig.align = "center", 
+#| out.width = "600px"
+
+library(ggplot2)
+ggplot(data, aes(x = shield_glycans, y = ab_resistance)) + 
+  geom_point() +
+  geom_smooth(method = lm) + 
+  theme_bw()
+```
+
+# Regression Analysis
+
+## Primary model
+
+```{r, fit-primary-model}
+mod <- glm(
+  ab_resistance ~ shield_glycans + region + env_length,
+  data = data
+)
+
+tbl_regression(mod) |>
+  add_global_p()
+```
+
+## Secondary model
+
+In this analysis, we analyzed a binary endpoint where level 1 means antibody resistance score was greater than `params$cutpoint`.
+
+```{r, binary-model}
+binary_mod <- glm(
+  I(ab_resistance > params$cutpoint) ~ shield_glycans + region + env_length,
+  data = data, 
+  family = binomial()
+)
+
+tbl_regression(binary_mod, exponentiate = TRUE) |>
+  add_global_p()
+```

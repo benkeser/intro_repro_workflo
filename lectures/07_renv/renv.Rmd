@@ -1,0 +1,174 @@
+---
+title: "Package management"
+author: "David Benkeser, PhD MPH<br> <span style = 'font-size: 50%;'> Emory University<br> Department of Biostatistics and Bioinformatics </span>"
+date: 'Introduction Reproducible Workflows in R<br><br>`r renv::activate("../.."); fontawesome::fa("link", fill = '#ffffff')` [.white[bit.ly/intro_repro_workflo]](https://bit.ly/intro_repro_workflo) <br> `r fontawesome::fa("book", fill = '#ffffff')` [.white[Additional reading]](https://benkeser.github.io/intro_repro_workflo/readings#project-organization)'
+tldr: ""
+recording: ""
+start: ""
+reading: "package-management"
+breakoutsoln: ""
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    nature:
+      titleSlideClass: ["left", "middle", "inverse"]
+      highlightStyle: tomorrow-night-blue
+      highlightLanguage: rmarkdown
+      highlightLines: false
+---
+
+### Reproducibility redux
+
+Thus far, we have mainly focused on making project reproducible on a limited basis.
+* Single system, single `R` installation
+
+However, we would ideally like to make projects work on different systems.
+* Good: my work PC + my laptop
+* Better: my work PC + my laptop + your laptop
+* Best: anywhere!
+
+This chapter will take us a step closer to Better via __package management__.
+
+???
+
+Containerization (e.g., Docker) is really the only way to achieve the Best level.
+
+### The `renv` package
+
+The `renv` workflow
+
+1. `renv::init()` to initialize a new project-specific environment
+2. work on the project as normal, installing/removing R packages as needed
+3. `renv::snapshot()` to save the state of the project library to `renv.lock`
+
+Having a project-specific environment allows you to:
+* record which (version of which) packages are used
+	* and where those packages were downloaded
+* have different versions of the same package on your computer without confusing `R`
+* synchronize library across different computers
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+`r fontawesome::fa("desktop", fill = "#ffffff")` .white[Initializing `renv` in HIV project]
+]
+
+.large[
+`r fontawesome::fa("code", fill = "#ffffff")` <a href="01_renv_hiv_project.zip" style="color:#ffffff" download>Code: `01_renv_hiv_project.zip`</a>
+]
+
+???
+
+Demo: 
+* `01_renv_hiv_project.zip`
+* run `renv::init()` and examine output
+
+---
+
+### `renv.lock` file
+
+You should now see __lockfile__, `renv.lock`
+
+````
+{
+  "R": {
+    "Version": "4.1.0",
+    "Repositories": [
+      {
+        "Name": "CRAN",
+        "URL": "https://mirrors.nics.utk.edu/cran"
+      }
+    ]
+  },
+  "Packages": {
+    "MASS": {
+      "Package": "MASS",
+      "Version": "7.3-54",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0e59129db205112e3963904db67fd0dc",
+      "Requirements": []
+    },
+  ...
+````
+
+---
+
+### `renv.lock` file
+
+This __lockfile__ records all of the information about packages needed by your project.
+* Version of package, where was it installed from, etc...
+
+How does it know?
+* `renv` scans all files in your project directory.
+* Looks for `library`, `require`, or `package::function` syntax.
+* Records those packages + their dependencies.
+
+---
+
+### `.Rprofile`
+
+We also see `.Rprofile`, containing one line.
+
+```{r, eval = FALSE}
+source("renv/activate.R")
+```
+
+We have not talked about `.Rprofile`'s because they are generally antithetical to reproducible research.
+
+When `R` starts, it searches for `.Rprofile` and runs what it finds.
+* Use this to change various options, always load packages, etc...
+
+In this case, whenever we start `R` in the project directory, we __activate__ our `R` environment.
+* Telling `R` where packages for this project are saved, etc...
+* Details are not too important.
+
+---
+
+### `renv` folder
+
+You will also see a folder `example_project/renv/`.
+* This folder contains your __project library__.
+
+`renv` tries to be clever about installing packages.
+* Already have a package installed elsewhere? `renv` will link to it.
+* Otherwise, package is installed in `renv/library`.
+
+???
+
+Note that `renv/.gitignore` ensures packages not put under version control.
+
+---
+
+### Activating `renv`
+
+`renv` will automatically be active in any `R` session that is run from the project directory.
+* Recall the presence and function of `.Rprofile`.
+
+Because our `Makefile` executes all code from the project directory, the switch to the project library should occur automatically.
+* Use `.libPaths()` to see where `R` is looking for packages.
+
+To activate in an `R` session run from elsewhere: `renv::activate('path/to/renv')`.
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+`r fontawesome::fa("desktop", fill = "#ffffff")` .white[Showing project library is in use]
+]
+
+.large[
+`r fontawesome::fa("code", fill = "#ffffff")` <a href="02_renv_hiv_project.zip" style="color:#ffffff" download>Code: `02_renv_hiv_project.zip`</a>
+]
+
+???
+
+Demo: 
+* `02_renv_hiv_project.zip`
+* add a `print(.libPaths())` to `00_clean_data.R` to confirm project library is being used
+

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>GNU Make</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="David Benkeser, PhD MPH   Emory University  Department of Biostatistics and Bioinformatics " />
+    <script src="make_files/header-attrs-2.14/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
+
+.title[
+# GNU Make
+]
+.author[
+### David Benkeser, PhD MPH<br> <span style="font-size: 50%;"> Emory University<br> Department of Biostatistics and Bioinformatics </span>
+]
+.date[
+### Introduction Reproducible Workflows in R<br><br><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg> <a href="https://bit.ly/intro_repro_workflo">.white[bit.ly/intro_repro_workflo]</a> <br> <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"/></svg> <a href="https://benkeser.github.io/intro_repro_workflo/readings#gnu-makefiles">.white[Additional reading]</a>
+]
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-slide-content {
+    font-size: 25px
+}
+&lt;/style&gt;
+
+### Why GNU Make?
+
+GNU Make is a program often used for compiling software. 
+* Building up many dependent pieces of software.
+
+But that's exactly __what data analysis is__! 
+* Analysis report &amp;#8592; tables and figures &amp;#8592; code &amp;#8592; data
+
+GNU Make is a formal system for:
+* automating a workflow
+  * just type `make` and hit enter!
+* documenting a workflow
+* documenting dependencies among data, code, results.
+
+???
+
+If you can effectively use `Make`, you are living the reproducible dream. Literally you will just go to the command line and type `make` and your
+whole analysis will be off and running. Data get updated? Swap in the new data set and `make`. Change the code for Figure 1? `make`.
+
+It takes time to get to this level, but this is the goal of reproducible data science. 
+
+Remember, everything that we're doing is about making our lives easier *in the long run*. It might be convenient in the short term to:
+* keep all your code in one long file,
+* open the file and interactively execute code,
+* copy/paste results.
+
+But in the long run, you'll have to 
+* sift through 1000s of lines of code every time you want to make a small change,
+* remember the exact sequence of code that you executed six months or a year ago,
+* copy/paste results 100 times!
+
+---
+
+### How do I make?
+
+GNU make can be installed via:
+
+MacOSX, through the command line toolkit.
+* Open Terminal application
+* Run: `xcode-select --install`
+
+Windows, through `winget`.
+* Open PowerShell application
+* Run: `winget install GnuWin32.Make`
+* Add installation path to `PATH`
+  * Probably in `C:\Program Files (x86)\GnuWin32\bin`
+
+---
+
+### How does it work?
+
+Recall, one of our derived outputs was a cleaned data set stored in `output/data_clean.rds`.
+* created when we ran `code/00_clean_data.R`
+
+A `Makefile` documents this dependency!
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[A first rule to make]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="01_make_hiv_project.zip" style="color:#ffffff"&gt;Code: `01_make_hiv_project.zip`&lt;/a&gt;
+]
+
+???
+
+Demo:
+* `01_make_hiv_project.zip`
+* make a plain text file named `Makefile`
+* input the following rule:
+  * `output/data_clean.rds: code/00_clean_data.R`
+  *     Rscript code/00_clean_data.R
+* note the use of TAB 
+* type `make output/data_clean.rds` at command line
+
+---
+
+### How does it work?
+
+````markdown
+output/data_clean.rds: code/00_clean_data.R
+    Rscript code/00_clean_data.R
+````
+
+* This is our first make __rule__
+* `output/data_clean.rds` is the __target__
+  * the file produced from running the code
+* `code/00_clean_data.R` is a __pre-requisite__
+  * a dependency of the target
+* `Rscript code/00_clean_data.R` is the __action__ to take to build the target
+
+.red[Note the use of TAB and not spaces!]
+
+???
+
+If you ever see the error `Makefile:3: *** missing separator.  Stop.`, you forgot to use tabs.
+
+This is going to be an annoying aspect of this lecture -- copying and pasting code from the slides to a text editor is not guaranteed to respect tabs. 
+
+---
+
+### How does it work?
+
+GNU Make logic:
+* Want to make __target__, which depends on __prereq__.
+* Does `target` exist? 
+  * If  &lt;em style="color:#da291c";&gt;No&lt;/em&gt; = execute __action__
+  * &lt;em style="color:#348338";&gt;Yes&lt;/em&gt; = ask, has __prereq__ changed since __target__ was last updated?
+      * &lt;em style="color:#348338";&gt;Yes&lt;/em&gt; = execute __action__. 
+      * &lt;em style="color:#da291c";&gt;No&lt;/em&gt; = take no action, __target__ is already up to date.
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Updating targets when pre-reqs are modified]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="02_make_hiv_project.zip" style="color:#ffffff"&gt;Code: `02_make_hiv_project.zip`&lt;/a&gt;
+]
+
+???
+
+Demo:
+* `02_make_hiv_project.zip`
+* run `make` again. Note that nothing needs to update.
+* update labels in `code/00_clean_data.R`
+* run `make` again. Note that code executes this time
+* check that labels were updated
+  * use `readRDS` to load `output/data_clean.rds`
+  * use `labelled::var_label(data$column_name)` to check changed labels
+* add a second rule
+  * `output/table1.rds: code/01_table1.R output/data_clean.rds`
+  * `Rscript code/01_table1.R`
+* change spanning header of table
+* `make output/table1.rds`
+* change more labels in `code/00_clean_data.R`
+* `make output/table1.rds`
+
+---
+
+### More on rules
+
+Rules do not always have to create files.
+* Example: `make clean` to remove old output files
+
+Another example: we could use `make descriptive_analysis` to run both `01_table1.R` and `02_scatter.R`
+* .red[Less clear documentation]
+* .green[Easier to remember?]
+
+The bash symbols `&amp;&amp;` and `\` can be helpful to split commands over multiple lines.
+* `&amp;&amp;` = only execute next command if last command runs error-free
+  * needed if specific order is required for multiple actions
+* `\` = escape character to ignore a new line
+
+???
+
+Can be nice to clean up the working directory to recreate all output of the workflow explicitly. 
+
+Notice `clean` has no dependencies. 
+
+---
+
+### `PHONY` rules
+
+Naming rules after things other than file names works fine .red[as long as there's no file] that shares the same name in the folder.
+
+In this case, we need to tell `make` that clean is a `PHONY`.
+* Example: `PHONY: clean`
+
+???
+
+Something to be aware of. You can generally leave off `PHONY` but good to know about it. For example, I could see a `make docs` command and a `docs` folder containing documentation. 
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Adding PHONY rules]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="03_make_hiv_project.zip" style="color:#ffffff"&gt;Code: `03_make_hiv_project.zip`&lt;/a&gt;
+]
+
+???
+
+Demo:
+* `03_make_hiv_project.zip`
+* make a rule for `descriptive_analysis` that runs both `code/01_table1.R` and `code/02_scatter.R`
+* make a rule for clean that removes all `.rds` files from output
+
+---
+
+### More on make
+You can get very fancy with `make`.
+* Automatic variable names
+  * E.g., use `$&lt;` in place of first dependency
+* Pattern matching
+  * E.g., `%` is a wildcard for targets and `$*` references the matched part of the target
+* [Functions](https://swcarpentry.github.io/make-novice/07-functions/index.html), [variables](https://swcarpentry.github.io/make-novice/06-variables/index.html), ...
+
+Other miscellaneous notes:
+* Name your `Makefile` e.g., `something_else`
+  * Then have to run `make -f something_else`
+* `make` with no options builds the first rule in your `Makefile`
+  * Add a rule for `all` at top?
+* Add `@` at start of action to not print output from command
+
+---
+
+class: title-slide, center, inverse, middle
+background-color: #487f84
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"/></svg> .white[Finishing make rule for HIV project]
+]
+
+.large[
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#ffffff;overflow:visible;position:relative;"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> &lt;a href="04_make_hiv_project.zip" style="color:#ffffff"&gt;Code: `04_make_hiv_project.zip`&lt;/a&gt;
+]
+
+???
+
+Demo:
+* `04_make_hiv_project.zip`
+* make rules for other aspects of report and the report itself
+* confirm that the whole pipeline builds from scratch
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "tomorrow-night-blue",
+"highlightLanguage": "rmarkdown",
+"highlightLines": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
