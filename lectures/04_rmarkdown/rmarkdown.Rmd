@@ -4,6 +4,7 @@ author: "David Benkeser, PhD MPH<br> <span style = 'font-size: 50%;'> Emory Univ
 date: 'Introduction Reproducible Workflows in R<br><br>`r renv::activate("../.."); fontawesome::fa("link", fill = '#ffffff')` [.white[bit.ly/intro_repro_workflo]](https://bit.ly/intro_repro_workflo) <br> `r fontawesome::fa("book", fill = '#ffffff')` [.white[Additional reading]](https://benkeser.github.io/intro_repro_workflo/readings#r-markdown)'
 tldr: "Writing reproducible reports has never been easier."
 recording: ""
+breakoutsoln: ""
 start: "0:0:0"
 reading: "r-markdown"
 breakoutsoln: "example.Rmd"
