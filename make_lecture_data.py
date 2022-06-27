@@ -88,15 +88,7 @@ def make_data(site_dir, which_data):
          "recording_url" : ''.join(x if x.isalnum() else '-' for x in config['title']).lower()
       }
       # writing _recordings file
-      text_list = ["---", "layout: default", "---", 
-      '<div class="container">'
-      '<iframe class="responsive-iframe" src="https://rsph.hosted.panopto.com/Panopto/Pages/Embed.aspx?id='+
-      config['recording']+
-      '&autoplay=false&offerviewer=true&showtitle=true&showbrand=false&start='+
-      str(get_sec(config['start']))+
-      '&interactivity=all" style="border: 5px solid #b58500;" allowfullscreen allow="autoplay"></iframe>',
-      '</div>'
-      ]
+      text_list = ["---", "layout: default", "---"]
       save_file = os.path.join(top_dir, "website", "_recordings/", config['title']+".md")
       out_file = open(save_file, "w")
       for line in text_list:
