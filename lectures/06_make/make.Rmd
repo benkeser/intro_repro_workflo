@@ -5,6 +5,7 @@ date: 'Introduction Reproducible Workflows in R<br><br>`r renv::activate("../.."
 tldr: "You'll never again think to yourself 'where the heck did this plot come from?'"
 recording: ""
 start: ""
+breakoutsoln: ""
 reading: "gnu-makefiles"
 output:
   xaringan::moon_reader:
