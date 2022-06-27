@@ -32,7 +32,7 @@ data <- read.csv(full_file_path, header = TRUE)
 
 ## Tabular analysis
 
-Characteristics of the `nrow(data)` viruses from the CATNAP database are displayed in the table below.
+Characteristics of the `r nrow(data)` viruses from the CATNAP database are displayed in the table below.
 
 ```{r, table1}
 # labelled + gtsummary package for making pretty html tables

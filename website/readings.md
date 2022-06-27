@@ -82,6 +82,13 @@ permalink: /readings/
 * [Example Makefile for R package](https://github.com/benkeser/drtmle/blob/master/Makefile)
 * [Managing Projects with GNU Make](https://www.oreilly.com/openbook/make3/book/)
 
+## Package management
+
+* [`renv` package page](https://rstudio.github.io/renv/index.html)
+* [Getting started with `renv`](https://rstudio.github.io/renv/articles/renv.html)
+* [`packrat`: an `renv` alternative](https://rstudio.github.io/packrat/)
+
+
 ## Project organization
 
 * [Tidy Data](https://doi.org/10.18637/jss.v059.i10)

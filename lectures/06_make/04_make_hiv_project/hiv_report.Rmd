@@ -1,0 +1,66 @@
+---
+title: VRC01 neutralization report
+author: David Benkeser
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+output: html_document
+params:
+  production: FALSE
+---
+
+```{r, chunk-opts, include = FALSE, message = FALSE, warning = FALSE, eval = params$production}
+library(knitr)
+opts_chunk$set(
+  echo = FALSE, warning = FALSE, message = FALSE
+)
+```
+
+```{r, load-data, echo = FALSE}
+data <- readRDS(here("output", "data_clean.rds"))
+```
+
+# Descriptive Analysis
+
+## Tabular analysis
+
+Characteristics of the `r nrow(data)` viruses from the CATNAP database are displayed in the table below.
+
+```{r, table1}
+table_one <- readRDS(here("output", "table1.rds"))
+table_one
+```
+
+## Graphical analysis
+
+Below we report a scatter plot of resistance as a function of PNGs in the glycan shield.
+
+```{r, plot-data}
+#| fig.cap = "Scatter plot with linear model smoother",
+#| fig.align = "center", 
+#| out.width = "600px"
+knitr::include_graphics(
+  here("figs", "scatter.png")
+)
+```
+
+# Regression Analysis
+
+```{r, load-models}
+models <- readRDS(here("output", "models.rds"))
+```
+
+## Primary model
+
+```{r, primary-model}
+library(gtsummary)
+tbl_regression(models$primary) |>
+  add_global_p()
+```
+
+## Secondary model
+
+In this analysis, we analyzed a binary endpoint where level 1 means antibody resistance score was greater than `r models$secondary_cutpoint`.
+
+```{r, binary-model}
+tbl_regression(models$secondary, exponentiate = TRUE) |>
+  add_global_p()
+```
