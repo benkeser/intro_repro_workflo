@@ -92,7 +92,7 @@ tbl_regression(mod) |>
 
 ## Secondary model
 
-In this analysis, we analyzed a binary endpoint where level 1 means antibody resistance score was greater than `params$cutpoint`.
+In this analysis, we analyzed a binary endpoint where level 1 means antibody resistance score was greater than `r params$cutpoint`.
 
 ```{r, binary-model}
 binary_mod <- glm(
