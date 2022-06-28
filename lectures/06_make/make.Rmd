@@ -178,7 +178,7 @@ output/data_clean.rds: code/00_clean_data.R
   * a dependency of the target
 * `Rscript code/00_clean_data.R` is the __action__ to take to build the target
 
-.red[Note the use of TAB and not spaces!]
+.red[Note: TAB must be used before the action! No spaces!]
 
 ???
 
@@ -194,7 +194,7 @@ GNU Make logic:
 * Want to make __target__, which depends on __prereq__.
 * Does `target` exist? 
   * If  <em style="color:#da291c";>No</em> = execute __action__
-  * <em style="color:#348338";>Yes</em> = ask, has __prereq__ changed since __target__ was last updated?
+  * <em style="color:#348338";>Yes</em> = has __prereq__ changed since __target__ last updated?
       * <em style="color:#348338";>Yes</em> = execute __action__. 
       * <em style="color:#da291c";>No</em> = take no action, __target__ is already up to date.
 
