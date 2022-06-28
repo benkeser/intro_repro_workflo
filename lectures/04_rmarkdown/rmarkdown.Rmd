@@ -383,11 +383,15 @@ Demo:
 * [`pandoc`](https://pandoc.org/)
   * a general purpose document converter
   * command line tool, no GUI
-  * `brew install pandoc`
+  * [install directly](https://pandoc.org/installing.html) or included in R Studio IDE installation
 
 ???
 
 It's useful to understand which program is doing what in case you need to chase down errors. 
+
+To find `pandoc` executable that is downloaded via R Studio:
+* navigate to directory where R Studio was installed
+* pandoc lives in `bin/quarto/bin/`
 
 ---
 
@@ -716,14 +720,6 @@ background-color: #487f84
 
 .large[
 `r fontawesome::fa("code", fill = "#ffffff")` <a href="https://raw.githubusercontent.com/benkeser/intro_repro_workflo/main/lectures/04_rmarkdown/hiv_project/tmp_reports/01_render_report.R" style="color:#ffffff">Code: `01_render_report.R`</a>
-]
-
-.large[
-and
-]
-
-.large[
-`r fontawesome::fa("folder", fill = "#ffffff")` <a href="hiv_project/data/vrc01_data.csv" style="color:#ffffff">Data: `vrc01_data.csv`</a>
 ]
 
 .large[
